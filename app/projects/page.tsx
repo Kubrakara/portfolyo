@@ -3,7 +3,7 @@ import MyProjects from "../components/MyProjects";
 
 const Projects = () => {
   return (
-    <div>
+    <div className="mt-14">
       <MyProjects></MyProjects>
     </div>
   );

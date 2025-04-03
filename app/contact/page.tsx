@@ -3,7 +3,7 @@ import ContactMe from "../components/ContactMe";
 
 const Contact = () => {
   return (
-    <div className="mt-10">
+    <div>
       <ContactMe></ContactMe>
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
+
 import { useTheme } from "next-themes";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaTwitter,
   FaInstagram,
@@ -9,125 +10,122 @@ import {
   FaTelegram,
   FaDiscord,
 } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const ContactMe = () => {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null; // 🚫 hydration hatasını engeller
+
   const isDarkMode = (theme || "light") === "dark";
+
+  const inputStyle = isDarkMode
+    ? "bg-[#2a173a] text-white"
+    : "bg-gray-200 text-[#22192f]";
+
+  const bgStyle = isDarkMode
+    ? "text-white bg-[#110b1a]"
+    : "bg-[#e9dff6] text-[#22192f]";
 
   return (
     <div
-      className={`min-h-screen flex flex-col items-center justify-center px-6 py-12
-      ${
-        isDarkMode
-          ? "bg-gradient-to-br from-black via-[#1a0f23] to-[#22192f] text-white" // Koyu mod
-          : "bg-[#DCCFED] text-[#22192f]" // Açık mod
-      }`}
+      className={`min-h-screen flex flex-col items-center justify-center px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-12 transition-all duration-300 ${bgStyle}`}
     >
-      {/* Üst Kısım - Contact Me Formu */}
-      <h1 className="text-6xl font-bold text-center mb-10">Contact me</h1>
+      {/* 📝 Başlık */}
+      <motion.h1
+        className="text-4xl sm:text-5xl font-bold text-center mb-10"
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        Contact Me
+      </motion.h1>
 
-      <div
-        className={`w-full max-w-2xl rounded-lg p-8 shadow-xl
-          ${
-            isDarkMode
-              ? "bg-[#1a0f23]"
-              : "bg-[#d8c4f2] shadow-2xl border border-[#ccc0dd]"
-          }`} // Formun arka planı tema uyumlu
+      {/* 📬 Form */}
+      <motion.div
+        className={`w-full max-w-lg rounded-2xl p-8 shadow-xl ${
+          isDarkMode
+            ? "bg-[#1a0f23]"
+            : "bg-[#d8c4f2] shadow-2xl border border-[#ccc0dd]"
+        }`}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
       >
         <form className="space-y-6">
-          <div>
-            <label
-              className={`block text-lg mb-2 ${
-                isDarkMode ? "text-white" : "text-[#22192f]"
-              }`}
-            >
-              Full name *
-            </label>
-            <input
-              type="text"
-              placeholder="Enter your full name ..."
-              className={`w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400
-                ${
-                  isDarkMode
-                    ? "bg-[#2a173a] text-white"
-                    : "bg-gray-200 text-[#22192f]"
-                }`}
-            />
-          </div>
+          {[
+            { label: "Full name *", type: "text", placeholder: "Your name..." },
+            { label: "Email *", type: "email", placeholder: "Your email..." },
+          ].map((field, i) => (
+            <div key={i}>
+              <label className="block text-lg mb-2">{field.label}</label>
+              <input
+                type={field.type}
+                placeholder={field.placeholder}
+                className={`w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 ${inputStyle}`}
+              />
+            </div>
+          ))}
 
           <div>
-            <label
-              className={`block text-lg mb-2 ${
-                isDarkMode ? "text-white" : "text-[#22192f]"
-              }`}
-            >
-              Email *
-            </label>
-            <input
-              type="email"
-              placeholder="Enter your email ..."
-              className={`w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400
-                ${
-                  isDarkMode
-                    ? "bg-[#2a173a] text-white"
-                    : "bg-gray-200 text-[#22192f]"
-                }`}
-            />
-          </div>
-
-          <div>
-            <label
-              className={`block text-lg mb-2 ${
-                isDarkMode ? "text-white" : "text-[#22192f]"
-              }`}
-            >
-              Message *
-            </label>
+            <label className="block text-lg mb-2">Message *</label>
             <textarea
               rows={4}
-              placeholder="Enter your message ..."
-              className={`w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400
-                ${
-                  isDarkMode
-                    ? "bg-[#2a173a] text-white"
-                    : "bg-gray-200 text-[#22192f]"
-                }`}
+              placeholder="Your message..."
+              className={`w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 ${inputStyle}`}
             />
           </div>
 
-          <button
+          <motion.button
             type="submit"
-            className="w-full py-3 bg-pink-600 rounded-full text-lg font-bold hover:bg-pink-500 transition"
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.05 }}
+            className="w-full py-3 bg-pink-600 rounded-full text-lg font-bold hover:bg-pink-500 transition-all duration-300"
           >
             Send Message
-          </button>
+          </motion.button>
         </form>
-      </div>
+      </motion.div>
 
-      {/* Alt Kısım - Follow Me */}
-      <div className="mt-16 text-center">
-        <h2 className="text-4xl font-bold">Follow me</h2>
-        <div className="flex justify-center gap-6 mt-6 text-2xl">
-          <a href="#" className="text-pink-500 hover:text-white transition">
-            <FaDiscord />
-          </a>
-          <a href="#" className="text-pink-500 hover:text-white transition">
-            <FaTwitter />
-          </a>
-          <a href="#" className="text-pink-500 hover:text-white transition">
-            <FaInstagram />
-          </a>
-          <a href="#" className="text-pink-500 hover:text-white transition">
-            <FaFacebook />
-          </a>
-          <a href="#" className="text-pink-500 hover:text-white transition">
-            <FaYoutube />
-          </a>
-          <a href="#" className="text-pink-500 hover:text-white transition">
-            <FaTelegram />
-          </a>
+      {/* 🌍 Sosyal Medya */}
+      <motion.div
+        className="mt-16 text-center"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        viewport={{ once: true }}
+      >
+        <h2 className="text-3xl sm:text-4xl font-bold mb-6">Follow Me</h2>
+        <div className="flex flex-wrap justify-center gap-6 text-3xl">
+          {[
+            { icon: FaDiscord, title: "Discord", link: "#" },
+            { icon: FaTwitter, title: "Twitter", link: "#" },
+            { icon: FaInstagram, title: "Instagram", link: "#" },
+            { icon: FaFacebook, title: "Facebook", link: "#" },
+            { icon: FaYoutube, title: "YouTube", link: "#" },
+            { icon: FaTelegram, title: "Telegram", link: "#" },
+          ].map(({ icon: Icon, title, link }, index) => (
+            <motion.a
+              key={index}
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={title}
+              whileHover={{ scale: 1.2 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="text-pink-500 hover:text-white transition-colors"
+            >
+              <Icon />
+            </motion.a>
+          ))}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
