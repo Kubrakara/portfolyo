@@ -1,17 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Rubik } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "./components/Navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// 🌟 Yeni font: Rubik
+const rubik = Rubik({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-rubik",
 });
 
 export const metadata: Metadata = {
@@ -27,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#DCCFED] dark:bg-[#0f0b15] text-black dark:text-white transition-colors duration-300`}
+        className={`${rubik.variable} font-sans antialiased bg-[#DCCFED] dark:bg-[#0f0b15] text-black dark:text-white transition-colors duration-300`}
       >
         <ThemeProvider
           attribute="class"
