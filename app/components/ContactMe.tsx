@@ -43,7 +43,7 @@ const ContactMe = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        Contact Me
+        İletişim Kurun
       </motion.h1>
 
       {/* 📬 Form */}
@@ -88,7 +88,7 @@ const ContactMe = () => {
             whileHover={{ scale: 1.05 }}
             className="w-full py-3 bg-pink-600 rounded-full text-lg font-bold hover:bg-pink-500 transition-all duration-300"
           >
-            Send Message
+            Mail Gönder
           </motion.button>
         </form>
       </motion.div>
@@ -101,7 +101,7 @@ const ContactMe = () => {
         transition={{ duration: 0.6, delay: 0.2 }}
         viewport={{ once: true }}
       >
-        <h2 className="text-3xl sm:text-4xl font-bold mb-6">Follow Me</h2>
+        <h2 className="text-3xl sm:text-4xl font-bold mb-6">Bana ulaşın !</h2>
         <div className="flex flex-wrap justify-center gap-6 text-3xl">
           {[
             { icon: FaDiscord, title: "Discord", link: "#" },

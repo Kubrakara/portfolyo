@@ -40,6 +40,13 @@ export function Navbar() {
 
   const isDarkMode = (theme || "light") === "dark";
 
+  const navItems = [
+    { label: "Anasayfa", href: "/" },
+    { label: "Hakkında", href: "/about" },
+    { label: "Projeler", href: "/projects" },
+    { label: "İletişim", href: "/contact" },
+  ];
+
   return (
     <>
       <motion.header
@@ -64,15 +71,11 @@ export function Navbar() {
             <span className="text-[#DCCFED]">Kara</span>
           </Link>
 
-          {/* 🌐 Masaüstü Menü */}
           <nav className="hidden lg:flex space-x-6 text-[#E1EBED] text-xl font-semibold">
-            {["Home", "About", "Projects", "Contact"].map((item) => (
-              <Link
-                key={item}
-                href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-              >
+            {navItems.map(({ label, href }) => (
+              <Link key={label} href={href}>
                 <Button className="hover:text-yellow-200 text-[#291C3A] dark:hover:text-yellow-300 dark:text-[#DCCFED] font-bold hover:bg-transparent bg-transparent text-xl transition-transform duration-300 hover:scale-110">
-                  {item}
+                  {label}
                 </Button>
               </Link>
             ))}
@@ -81,7 +84,7 @@ export function Navbar() {
           {/* 🌙 Tema Geçiş Butonu */}
           <div
             aria-label="Toggle theme"
-            className="hidden lg:block cursor-pointer p-2 ml-4 transition-transform duration-300 hover:scale-110"
+            className="hidden lg:flex flex-col items-center cursor-pointer p-2 ml-4 mt-1  transition-transform duration-300 hover:scale-110"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           >
             <div className="w-[60px] h-[8px] border-2 border-[#E1EBED] rounded-full bg-[#8121D0] relative">
@@ -92,6 +95,13 @@ export function Navbar() {
                 )}
               />
             </div>
+            <p className="font-semibold text-xs mt-1 text-[#DCCFED] text-center">
+              <span className={cn(theme === "dark" && "underline")}>dark</span>{" "}
+              -{" "}
+              <span className={cn(theme === "light" && "underline")}>
+                light
+              </span>
+            </p>
           </div>
 
           {/* 📱 Mobil Menü İkonu */}

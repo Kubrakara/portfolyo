@@ -9,40 +9,52 @@ import { motion } from "framer-motion";
 
 const skills = [
   {
-    title: "Programlama Dilleri",
-    description: "Python, JavaScript, TypeScript",
-    image: "/images/languages.png",
+    title: "Python",
+    image: "/images/python.png",
   },
   {
-    title: "Frontend Geliştirme",
-    description: "React, Next.js, React Native, TailwindCSS, Figma",
-    image: "/images/frontend.png",
+    title: "TypeScript",
+    image: "/images/typescript.png",
   },
   {
-    title: "Backend Geliştirme",
-    description: "API Geliştirme, REST API, Firebase, NoSQL, SQL",
-    image: "/images/backend.png",
+    title: "JavaScript",
+    image: "/images/javaScript.png",
   },
   {
-    title: "Veritabanı Teknolojileri",
-    description: "Firebase, NoSQL Database, SQL",
-    image: "/images/database.png",
+    title: "NextJs",
+    image: "/images/nextjs.png",
   },
   {
-    title: "Makine Öğrenmesi",
-    description: "Python ile Makine Öğrenmesi",
-    image: "/images/ml.png",
+    title: "TailwindCss",
+    image: "/images/tailwind.png",
   },
   {
-    title: "Siber Güvenlik",
-    description: "Linux, Güvenlik Testleri ve Zafiyet Analizi",
-    image: "/images/cybersecurity.png",
+    title: "Html",
+    image: "/images/html.png",
   },
   {
-    title: "Kişisel Beceriler",
-    description:
-      "Takım Çalışması, Problem Çözme, Zaman Yönetimi, Proje Yönetimi",
-    image: "/images/softskills.png",
+    title: "Css",
+    image: "/images/css.png",
+  },
+  {
+    title: "Vercel",
+    image: "/images/vercel.png",
+  },
+  {
+    title: "NodeJs",
+    image: "/images/nodejs.png",
+  },
+  {
+    title: "Firebase",
+    image: "/images/firebase.png",
+  },
+  {
+    title: "Sql",
+    image: "/images/sql.png",
+  },
+  {
+    title: "Linux",
+    image: "/images/linux.png",
   },
 ];
 
@@ -54,7 +66,7 @@ const AboutMe: React.FC = () => {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null; // Hydration hatası çözümü
+  if (!mounted) return null;
 
   const isDarkMode = (theme || "light") === "dark";
 
@@ -120,10 +132,10 @@ const AboutMe: React.FC = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
               className={`${
-                isDarkMode ? "bg-[#1c152a]" : "bg-white"
+                isDarkMode ? "bg-[#1c152a]" : "bg-[#eee8f5]"
               } p-6 rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 border border-purple-500/10`}
             >
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-center gap-4 mb-2">
                 <Image
                   src={skill.image}
                   alt={skill.title}
@@ -133,13 +145,6 @@ const AboutMe: React.FC = () => {
                 />
                 <h4 className="text-xl font-semibold">{skill.title}</h4>
               </div>
-              <p
-                className={`${
-                  isDarkMode ? "text-gray-300" : "text-gray-700"
-                } text-sm leading-relaxed`}
-              >
-                {skill.description}
-              </p>
             </motion.div>
           ))}
         </div>

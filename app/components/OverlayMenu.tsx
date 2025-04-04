@@ -21,7 +21,12 @@ export function OverlayMenu({ isOpen, toggleMenu }: OverlayMenuProps) {
     setMounted(true);
   }, []);
 
-  const navItems = ["Home", "About", "Projects", "Contact"];
+  const navItems = [
+    { label: "Anasayfa", href: "/" },
+    { label: "Hakkında", href: "/about" },
+    { label: "Projeler", href: "/projects" },
+    { label: "İletişim", href: "/contact" },
+  ];
 
   return (
     <AnimatePresence>
@@ -48,20 +53,17 @@ export function OverlayMenu({ isOpen, toggleMenu }: OverlayMenuProps) {
             }}
             className="flex flex-col items-center space-y-8 text-4xl uppercase"
           >
-            {navItems.map((item, i) => (
+            {navItems.map(({ label, href }) => (
               <motion.div
-                key={item}
+                key={label}
                 variants={{
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0 },
                 }}
               >
-                <Link
-                  href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                  onClick={toggleMenu}
-                >
+                <Link href={href} onClick={toggleMenu}>
                   <Button className="hover:text-[#8121D0] transition-colors text-white text-2xl bg-transparent">
-                    {item}
+                    {label}
                   </Button>
                 </Link>
               </motion.div>

@@ -10,11 +10,42 @@ const HomePage = () => {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
+  const roles = ["FullStack Devloper", "Web Developer", "Mobile Developer"];
+  const [index, setIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(0);
+  const [reverse, setReverse] = useState(false);
+  const [displayText, setDisplayText] = useState("");
+
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null; // ❗ hydration hatasını önler
+  useEffect(() => {
+    if (!mounted) return;
+
+    if (subIndex === roles[index].length + 1 && !reverse) {
+      setTimeout(() => setReverse(true), 1000);
+      return;
+    }
+
+    if (subIndex === 0 && reverse) {
+      setReverse(false);
+      setIndex((prev) => (prev + 1) % roles.length);
+      return;
+    }
+
+    const timeout = setTimeout(
+      () => {
+        setSubIndex((prev) => prev + (reverse ? -1 : 1));
+        setDisplayText(roles[index].substring(0, subIndex));
+      },
+      reverse ? 40 : 100
+    );
+
+    return () => clearTimeout(timeout);
+  }, [subIndex, index, reverse, mounted]);
+
+  if (!mounted) return null;
 
   const isDarkMode = (theme || "light") === "dark";
   const bgStyle = isDarkMode
@@ -25,7 +56,7 @@ const HomePage = () => {
     <div
       className={`flex flex-col md:flex-row items-center justify-center md:justify-between min-h-screen px-6 md:px-16 lg:px-24 transition-all duration-300 ${bgStyle}`}
     >
-      {/* 🚀 Sol Bölüm (Metinler) */}
+      {/* 🚀 Sol Bölüm */}
       <motion.div
         className="flex flex-col items-center md:items-start w-full md:w-1/2 text-center md:text-left"
         initial={{ opacity: 0, y: 40 }}
@@ -39,6 +70,7 @@ const HomePage = () => {
           </span>
         </h1>
 
+        {/* 🎯 Typewriter Efekti */}
         <motion.div
           className="bg-gradient-to-r bg-clip-text text-transparent from-purple-700 via-blue-400 to-blue-300 dark:from-purple-400 dark:via-blue-500 dark:to-blue-300"
           initial={{ opacity: 0 }}
@@ -46,9 +78,13 @@ const HomePage = () => {
           transition={{ duration: 1, delay: 0.3 }}
         >
           <h2 className="text-5xl md:text-7xl font-bold mt-2">Ben Kübra,</h2>
-          <h2 className="text-3xl md:text-5xl font-bold">
-            FullStack & Web Developerım
-          </h2>
+
+          <div className="h-[60px] mt-2">
+            <h2 className="text-3xl md:text-5xl font-bold">
+              {displayText}
+              <span className="animate-pulse">|</span>
+            </h2>
+          </div>
         </motion.div>
 
         <motion.p
@@ -57,10 +93,10 @@ const HomePage = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.6 }}
         >
-          I build things for everywhere 🚀
+          Modern, yaratıcı ve kullanıcı dostu deneyimler geliştiriyorum 🚀
         </motion.p>
 
-        {/* 🌍 Sosyal Medya İkonları */}
+        {/* 🌐 Sosyal Medya */}
         <motion.div
           className="flex gap-4 mt-6 text-3xl"
           initial={{ opacity: 0 }}
@@ -89,7 +125,7 @@ const HomePage = () => {
         </motion.div>
       </motion.div>
 
-      {/* 🎨 Sağ Bölüm (Görsel) */}
+      {/* 🖼️ Sağ Görsel */}
       <motion.div
         className="w-full md:w-1/2 flex justify-center mt-10 md:mt-0"
         initial={{ opacity: 0 }}

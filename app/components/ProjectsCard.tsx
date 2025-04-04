@@ -78,12 +78,12 @@ export default function ProjectCard({
         <div className="flex flex-wrap gap-3">
           <Link href={liveUrl} target="_blank">
             <button className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:scale-105 transition-transform">
-              Live preview
+              Canlı Görüntüle
             </button>
           </Link>
           <Link href={githubUrl} target="_blank">
             <button className="border border-gray-400 text-gray-300 px-4 py-2 rounded-lg text-sm hover:bg-gray-700 transition-all">
-              Check on GitHub
+              Githubta Görüntüle
             </button>
           </Link>
         </div>

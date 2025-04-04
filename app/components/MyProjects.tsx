@@ -30,7 +30,7 @@ export default function MyProjects() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        My Projects
+        Projelerim
       </motion.h2>
 
       {/* 🛠 Responsive Grid Layout */}
