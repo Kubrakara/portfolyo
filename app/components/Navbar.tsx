@@ -56,7 +56,7 @@ export function Navbar() {
           {/* 🚀 Logo */}
           <Link
             href="/"
-            className="font-montserrat font-black text-2xl uppercase tracking-wider transition-all hover:opacity-90 text-[#E1EBED]"
+            className="font-black text-2xl uppercase tracking-wider transition-all hover:opacity-90 text-[#E1EBED]"
           >
             <span className="duration-200 dark:text-[#22192f] text-[#8121D1]">
               Kübra
