@@ -30,7 +30,7 @@ export const projects = [
     title: "Code-Vuln-Detect-Tool – Zafiyetli Kod Analizi",
     description:
       "Kodlardaki güvenlik açıklarını analiz eden ve potansiyel riskleri tespit eden bir makine öğrenmesi uygulaması. Python ve Jupyter Notebook kullanılarak geliştirilmiştir.",
-    image: "/proje/code-vuln-detect.png",
+    image: "/proje/vuln.png",
     tags: ["Python", "Machine Learning", "Jupyter Notebook", "Cyber Security"],
     liveUrl: "https://your-live-site.com",
     githubUrl: "https://github.com/Kubrakara/Code-Vuln-Detect-Tool",
@@ -63,7 +63,7 @@ export const projects = [
     title: "Docker Destekli Otomatik API Dokümantasyon ve Test Aracı",
     description:
       "Swagger/OpenAPI dokümanları üzerinden otomatik test, yük testi, loglama, görsel raporlama ve AI destekli açıklamalar sağlayan Docker tabanlı kapsamlı bir araç. FastAPI, Next.js ve Gemini API entegrasyonu ile geliştirildi.",
-    image: "/proje/api-tester.png",
+    image: "/proje/apidökümantasyon.png",
     tags: [
       "FastAPI",
       "Node.js",
@@ -82,7 +82,7 @@ export const projects = [
     title: "FEMA API Tabanlı Afet Bilgilendirme Mobil Uygulaması",
     description:
       "FEMA'nın Disaster Declarations API'sini kullanarak afet verilerini anlık olarak çeken ve kullanıcıları mobil bildirimlerle bilgilendiren React Native Expo tabanlı mobil uygulama.",
-    image: "/proje/fema-alert.png",
+    image: "/proje/afet.png",
     tags: ["React Native", "Expo", "API", "Mobil Bildirim", "Afet Yönetimi"],
     liveUrl: "https://your-live-site.com",
     githubUrl: "https://github.com/Kubrakara/AlertScope",
@@ -92,7 +92,7 @@ export const projects = [
       "Ağ Anomali Tespiti – Makine Öğrenmesi ile DDOS ve Brute Force Analizi",
     description:
       "Kaggle üzerindeki ağ trafiği veri seti kullanılarak, Python ile geliştirilen makine öğrenmesi modeli sayesinde DDOS, Brute Force gibi saldırılar gerçek zamanlı olarak tespit edilmektedir.",
-    image: "/proje/network-anomaly.png",
+    image: "/proje/anomali.png",
     tags: [
       "Python",
       "Machine Learning",
