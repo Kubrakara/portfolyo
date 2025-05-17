@@ -16,11 +16,15 @@ const ContactMe = () => {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null; // 🚫 hydration hatasını engeller
+  if (!mounted) return null;
 
   const isDarkMode = (theme || "light") === "dark";
 
@@ -32,11 +36,30 @@ const ContactMe = () => {
     ? "text-white bg-[#110b1a]"
     : "bg-[#e9dff6] text-[#22192f]";
 
+  const handleMailSend = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const mailtoLink = `mailto:kubra26kara@gmail.com?subject=İletişim Talebi - ${encodeURIComponent(
+      name
+    )}&body=Gönderen: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(
+      email
+    )}%0A%0AMesaj:%0A${encodeURIComponent(message)}`;
+
+    window.location.href = mailtoLink;
+
+    window.location.href = mailtoLink;
+
+    setTimeout(() => {
+      setName("");
+      setEmail("");
+      setMessage("");
+    }, 200);
+  };
+
   return (
     <div
       className={`min-h-screen flex flex-col items-center justify-center px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-12 transition-all duration-300 ${bgStyle}`}
     >
-      {/* 📝 Başlık */}
       <motion.h1
         className="text-4xl sm:text-5xl font-bold text-center mb-10"
         initial={{ opacity: 0, y: -30 }}
@@ -46,7 +69,6 @@ const ContactMe = () => {
         İletişim Kurun
       </motion.h1>
 
-      {/* 📬 Form */}
       <motion.div
         className={`w-full max-w-lg rounded-2xl p-8 shadow-xl ${
           isDarkMode
@@ -58,27 +80,38 @@ const ContactMe = () => {
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <form className="space-y-6">
-          {[
-            { label: "Full name *", type: "text", placeholder: "Your name..." },
-            { label: "Email *", type: "email", placeholder: "Your email..." },
-          ].map((field, i) => (
-            <div key={i}>
-              <label className="block text-lg mb-2">{field.label}</label>
-              <input
-                type={field.type}
-                placeholder={field.placeholder}
-                className={`w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 ${inputStyle}`}
-              />
-            </div>
-          ))}
-
+        <form onSubmit={handleMailSend} className="space-y-6">
+          <div>
+            <label className="block text-lg mb-2">Full name *</label>
+            <input
+              type="text"
+              placeholder="Your name..."
+              className={`w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 ${inputStyle}`}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-lg mb-2">Email *</label>
+            <input
+              type="email"
+              placeholder="Your email..."
+              className={`w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 ${inputStyle}`}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
           <div>
             <label className="block text-lg mb-2">Message *</label>
             <textarea
               rows={4}
               placeholder="Your message..."
               className={`w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 ${inputStyle}`}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
             />
           </div>
 
