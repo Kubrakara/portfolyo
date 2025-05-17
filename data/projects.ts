@@ -29,7 +29,13 @@ export const projects = [
     description:
       "Kodlardaki güvenlik açıklarını analiz eden ve potansiyel riskleri tespit eden bir makine öğrenmesi uygulaması. Python ve Jupyter Notebook kullanılarak geliştirilmiştir.",
     image: "/proje/vuln.png",
-    tags: ["Python", "Machine Learning", "Jupyter Notebook", "Cyber Security"],
+    tags: [
+      "Python",
+      "AI",
+      "Machine Learning",
+      "Jupyter Notebook",
+      "Cyber Security",
+    ],
     githubUrl: "https://github.com/Kubrakara/Code-Vuln-Detect-Tool",
   },
   {
@@ -43,6 +49,7 @@ export const projects = [
       "Firebase",
       "Yapay Zeka",
       "Tailwind",
+      "Web",
     ],
     liveUrl: "https://www.gurmeai.com.tr/",
     githubUrl: "https://github.com/Kubrakara/GurmeAi",
