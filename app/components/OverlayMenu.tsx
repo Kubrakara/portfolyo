@@ -90,11 +90,11 @@ export function OverlayMenu({ isOpen, toggleMenu }: OverlayMenuProps) {
 
               <p className="font-semibold text-sm tracking-wider text-[#DCCFED]">
                 <span className={cn(theme === "dark" && "underline")}>
-                  dark
+                  light
                 </span>{" "}
                 -{" "}
                 <span className={cn(theme === "light" && "underline")}>
-                  light
+                  dark
                 </span>
               </p>
             </motion.div>

@@ -96,11 +96,9 @@ export function Navbar() {
               />
             </div>
             <p className="font-semibold text-xs mt-1 text-[#DCCFED] text-center">
-              <span className={cn(theme === "dark" && "underline")}>dark</span>{" "}
+              <span className={cn(theme === "dark" && "underline")}>light</span>{" "}
               -{" "}
-              <span className={cn(theme === "light" && "underline")}>
-                light
-              </span>
+              <span className={cn(theme === "light" && "underline")}>dark</span>
             </p>
           </div>
 
