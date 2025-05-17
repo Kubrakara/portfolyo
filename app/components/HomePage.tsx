@@ -93,7 +93,7 @@ const HomePage = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.6 }}
         >
-          Modern, yaratıcı ve kullanıcı dostu deneyimler geliştiriyorum 🚀
+          Modern, yaratıcı ve kullanıcı dostu deneyimler geliştiriyorum.
         </motion.p>
 
         {/* 🌐 Sosyal Medya */}
@@ -104,10 +104,21 @@ const HomePage = () => {
           transition={{ duration: 1, delay: 0.9 }}
         >
           {[
-            { icon: FaTwitter, title: "Twitter", link: "#" },
-            { icon: FaGithub, title: "GitHub", link: "#" },
-            { icon: FaLinkedin, title: "LinkedIn", link: "#" },
-            { icon: FaDribbble, title: "Dribbble", link: "#" },
+            {
+              icon: FaGithub,
+              title: "GitHub",
+              link: "https://github.com/Kubrakara",
+            },
+            {
+              icon: FaLinkedin,
+              title: "LinkedIn",
+              link: "https://www.linkedin.com/in/k%C3%BCbra-kara-394850/",
+            },
+            {
+              icon: FaDribbble,
+              title: "Dribbble",
+              link: "https://medium.com/@kubra26kara",
+            },
           ].map(({ icon: Icon, title, link }, index) => (
             <motion.a
               key={index}

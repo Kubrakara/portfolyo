@@ -6,16 +6,14 @@ import { Navbar } from "./components/Navbar";
 import { Cursor } from "./components/Cursor";
 import { Analytics } from "@vercel/analytics/react";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
+// fontlar
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
+// metadata sadece sunucu bileşeninde olur
 export const metadata: Metadata = {
   title: "Kübra Kara | Full Stack Developer",
   description: "Modern ve yaratıcı web uygulamaları geliştiriyorum.",
@@ -27,9 +25,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+    <html lang="tr" suppressHydrationWarning className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#DCCFED] dark:bg-[#0f0b15] text-black dark:text-white transition-colors duration-300`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased transition-colors duration-300`}
       >
         <ThemeProvider
           attribute="class"
@@ -37,10 +35,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Analytics></Analytics>
+          <Analytics />
           <Navbar />
-          <Cursor />
-
+          {/* <Cursor /> */}
           <main className="pt-24">{children}</main>
         </ThemeProvider>
       </body>

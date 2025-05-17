@@ -56,6 +56,14 @@ const skills = [
     title: "Linux",
     image: "/images/linux.png",
   },
+  {
+    title: "expo",
+    image: "/images/expo.png",
+  },
+  {
+    title: "Google Play",
+    image: "/images/play.png",
+  },
 ];
 
 const AboutMe: React.FC = () => {
