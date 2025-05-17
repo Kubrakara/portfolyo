@@ -5,7 +5,7 @@ export const projects = [
       "Shielera, dosya güvenliği, parola yönetimi ve masaüstü kontrol sistemini bir araya getiren kapsamlı bir güvenlik uygulamasıdır. Python, React Native Expo ve Next.js kullanılarak geliştirilmiştir.",
     image: "/proje/shieldera.png",
     tags: ["Python", "React Native", "Next.js", "Firebase", "Güvenlik"],
-    liveUrl: "https://your-live-site.com",
+    liveUrl: "https://shielderaweb.vercel.app/",
     githubUrl: "https://github.com/your-repo",
   },
   {
@@ -14,8 +14,6 @@ export const projects = [
       "Günlük olarak güncellenen görselleri otomatik olarak indiren Python tabanlı bir bot. Selenium kullanarak web üzerinde otomatik gezinme ve dosya indirme işlemlerini gerçekleştirir.",
     image: "/proje/python-bot.png",
     tags: ["Python", "Selenium", "Web Scraping", "Otomasyon"],
-    liveUrl: "https://your-live-site.com",
-    githubUrl: "https://github.com/your-repo",
   },
   {
     title: "Esnafeimza.com.tr – E-İmza Başvuru Platformu",
@@ -24,7 +22,7 @@ export const projects = [
     image: "/proje/e-imza.png",
     tags: ["Next.js", "TypeScript", "Google Sheets", "Firebase", "Tailwind"],
     liveUrl: "https://esnafeimza.com.tr/",
-    githubUrl: "https://github.com/your-repo",
+    githubUrl: "https://github.com/Kubrakara/EsnafE-imza",
   },
   {
     title: "Code-Vuln-Detect-Tool – Zafiyetli Kod Analizi",
@@ -32,7 +30,6 @@ export const projects = [
       "Kodlardaki güvenlik açıklarını analiz eden ve potansiyel riskleri tespit eden bir makine öğrenmesi uygulaması. Python ve Jupyter Notebook kullanılarak geliştirilmiştir.",
     image: "/proje/vuln.png",
     tags: ["Python", "Machine Learning", "Jupyter Notebook", "Cyber Security"],
-    liveUrl: "https://your-live-site.com",
     githubUrl: "https://github.com/Kubrakara/Code-Vuln-Detect-Tool",
   },
   {
@@ -56,8 +53,7 @@ export const projects = [
       "React Native Expo ile geliştirilen, kullanıcıların fotoğraf ve video paylaşabileceği, sosyal medya etkileşimleri sunan bir uygulama. Firebase entegrasyonu ile gerçek zamanlı veri yönetimi sağlar.",
     image: "/proje/react-native-expo.png",
     tags: ["React Native", "Expo", "Firebase", "Sosyal Medya", "Mobil"],
-    liveUrl: "https://your-live-site.com",
-    githubUrl: "https://github.com/your-repo",
+    githubUrl: "https://github.com/Kubrakara/SpotLIght-App",
   },
   {
     title: "Docker Destekli Otomatik API Dokümantasyon ve Test Aracı",
@@ -76,7 +72,7 @@ export const projects = [
       "Load Test",
     ],
     liveUrl: "https://your-live-site.com",
-    githubUrl: "https://github.com/your-repo",
+    githubUrl: "https://github.com/Kubrakara/OtomatikApiTestAraci",
   },
   {
     title: "FEMA API Tabanlı Afet Bilgilendirme Mobil Uygulaması",
@@ -84,7 +80,6 @@ export const projects = [
       "FEMA'nın Disaster Declarations API'sini kullanarak afet verilerini anlık olarak çeken ve kullanıcıları mobil bildirimlerle bilgilendiren React Native Expo tabanlı mobil uygulama.",
     image: "/proje/afet.png",
     tags: ["React Native", "Expo", "API", "Mobil Bildirim", "Afet Yönetimi"],
-    liveUrl: "https://your-live-site.com",
     githubUrl: "https://github.com/Kubrakara/AlertScope",
   },
   {
@@ -100,7 +95,6 @@ export const projects = [
       "Network Analysis",
       "Jupyter Notebook",
     ],
-    liveUrl: "https://your-live-site.com",
     githubUrl: "https://github.com/your-repo",
   },
 ];
