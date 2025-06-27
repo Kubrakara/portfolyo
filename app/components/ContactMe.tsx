@@ -82,10 +82,10 @@ const ContactMe = () => {
       >
         <form onSubmit={handleMailSend} className="space-y-6">
           <div>
-            <label className="block text-lg mb-2">Full name *</label>
+            <label className="block text-lg mb-2">İsim Soyisim *</label>
             <input
               type="text"
-              placeholder="Your name..."
+              placeholder="İsim Soyisim..."
               className={`w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 ${inputStyle}`}
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -96,7 +96,7 @@ const ContactMe = () => {
             <label className="block text-lg mb-2">Email *</label>
             <input
               type="email"
-              placeholder="Your email..."
+              placeholder="Mail..."
               className={`w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 ${inputStyle}`}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -104,10 +104,10 @@ const ContactMe = () => {
             />
           </div>
           <div>
-            <label className="block text-lg mb-2">Message *</label>
+            <label className="block text-lg mb-2">Mesaj *</label>
             <textarea
               rows={4}
-              placeholder="Your message..."
+              placeholder="Mesajınız..."
               className={`w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 ${inputStyle}`}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
@@ -137,12 +137,9 @@ const ContactMe = () => {
         <h2 className="text-3xl sm:text-4xl font-bold mb-6">Bana ulaşın !</h2>
         <div className="flex flex-wrap justify-center gap-6 text-3xl">
           {[
-            { icon: FaDiscord, title: "Discord", link: "#" },
             { icon: FaTwitter, title: "Twitter", link: "#" },
             { icon: FaInstagram, title: "Instagram", link: "#" },
-            { icon: FaFacebook, title: "Facebook", link: "#" },
-            { icon: FaYoutube, title: "YouTube", link: "#" },
-            { icon: FaTelegram, title: "Telegram", link: "#" },
+            { icon: FaFacebook, title: "Facebook", link: "#" },   
           ].map(({ icon: Icon, title, link }, index) => (
             <motion.a
               key={index}

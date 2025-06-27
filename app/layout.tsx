@@ -3,8 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "./components/Navbar";
-import { Cursor } from "./components/Cursor";
 import { Analytics } from "@vercel/analytics/react";
+import { Snowfall } from "./components/Snowfall";
 
 // fontlar
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -37,7 +37,7 @@ export default function RootLayout({
         >
           <Analytics />
           <Navbar />
-          {/* <Cursor /> */}
+          <Snowfall />
           <main className="pt-24">{children}</main>
         </ThemeProvider>
       </body>

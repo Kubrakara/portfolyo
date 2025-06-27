@@ -7,62 +7,57 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 
-const skills = [
+// Teknolojileri kategorilere göre gruplayın
+const categories = [
   {
-    title: "Python",
-    image: "/images/python.png",
+    title: "Web & Mobil Teknolojileri",
+    skills: [
+      { title: "React", image: "/images/react.png" },
+      { title: "React Native", image: "/images/react-native.png" },
+      { title: "Expo", image: "/images/expo.png" },
+      { title: "Next.js", image: "/images/nextjs.png" },
+      { title: "TailwindCSS", image: "/images/tailwind.png" },
+      { title: "Shadcn UI", image: "/images/shadcnui.png" },
+      { title: "Kotlin", image: "/images/kotlin.png" },
+      { title: "Android Studio", image: "/images/android-studio.png" },
+    ],
   },
   {
-    title: "TypeScript",
-    image: "/images/typescript.png",
+    title: "Backend & Veri Tabanı Teknolojileri",
+    skills: [
+      { title: "Node.js", image: "/images/nodejs.png" },
+      { title: "Python", image: "/images/python.png" },
+      { title: "Firebase", image: "/images/firebase.png" },
+      { title: "SQL", image: "/images/sql.png" },
+      { title: "MongoDB", image: "/images/mongodb.png" },
+    ],
   },
   {
-    title: "JavaScript",
-    image: "/images/javaScript.png",
+    title: "Entegrasyon Araçları",
+    skills: [
+      { title: "Vercel", image: "/images/vercel.png" },
+      { title: "Render", image: "/images/render.png" },
+      { title: "Google Play", image: "/images/play.png" },
+      { title: "Google Ads", image: "/images/google-ads.png" },
+      { title: "Google AdMob", image: "/images/google-admob.png" },
+    ],
   },
   {
-    title: "NextJs",
-    image: "/images/nextjs.png",
+    title: "Yapay Zeka Destekli Geliştirme Araçları",
+    skills: [
+      { title: "GitHub Copilot", image: "/images/github-copilot.png" },
+      { title: "ChatGPT", image: "/images/chatgpt.png" },
+      { title: "Gemini", image: "/images/gemini.png" },
+      { title: "DeepSeek", image: "/images/deepseek.png" },
+    ],
   },
   {
-    title: "TailwindCss",
-    image: "/images/tailwind.png",
-  },
-  {
-    title: "Html",
-    image: "/images/html.png",
-  },
-  {
-    title: "Css",
-    image: "/images/css.png",
-  },
-  {
-    title: "Vercel",
-    image: "/images/vercel.png",
-  },
-  {
-    title: "NodeJs",
-    image: "/images/nodejs.png",
-  },
-  {
-    title: "Firebase",
-    image: "/images/firebase.png",
-  },
-  {
-    title: "Sql",
-    image: "/images/sql.png",
-  },
-  {
-    title: "Linux",
-    image: "/images/linux.png",
-  },
-  {
-    title: "expo",
-    image: "/images/expo.png",
-  },
-  {
-    title: "Google Play",
-    image: "/images/play.png",
+    title: "Yayınlama & Platformlar",
+    skills: [
+      { title: "Vercel", image: "/images/vercel.png" },
+      { title: "Google Play", image: "/images/play.png" },
+      { title: "Expo", image: "/images/expo.png" },
+    ],
   },
 ];
 
@@ -88,7 +83,7 @@ const AboutMe: React.FC = () => {
       <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between w-full">
         <div className="relative w-full lg:w-1/2 flex justify-center">
           <Image
-            src="/woman.png"
+            src="/1ben.png"
             alt="About Me"
             width={360}
             height={360}
@@ -98,7 +93,7 @@ const AboutMe: React.FC = () => {
 
         <div className="w-full lg:w-1/2 mt-10 lg:mt-0 px-4 text-center lg:text-left">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold">
-            About <span className="text-purple-400">Me</span>
+            Neler <span className="text-purple-400">yapıyorum ?</span>
           </h2>
           <p className="mt-6 text-base sm:text-lg md:text-xl leading-relaxed">
             Bilgisayar Mühendisliği eğitimi alarak yazılım geliştirme ve siber
@@ -128,34 +123,38 @@ const AboutMe: React.FC = () => {
 
       {/* 💡 Yetkinlikler Bölümü */}
       <section className="w-full mt-20">
-        <h3 className="text-3xl sm:text-4xl font-bold text-center mb-10">
-          Yetkinliklerim
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {skills.map((skill, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className={`${
-                isDarkMode ? "bg-[#1c152a]" : "bg-[#eee8f5]"
-              } p-6 rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 border border-purple-500/10`}
-            >
-              <div className="flex items-center gap-4 mb-2">
-                <Image
-                  src={skill.image}
-                  alt={skill.title}
-                  width={44}
-                  height={44}
-                  className="rounded-lg"
-                />
-                <h4 className="text-xl font-semibold">{skill.title}</h4>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        {categories.map((category, index) => (
+          <div key={index} className="mb-20">
+            <h3 className="text-3xl sm:text-3xl font-bold text-center mb-10">
+              {category.title}
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+              {category.skills.map((skill, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className={`${
+                    isDarkMode ? "bg-[#1c152a]" : "bg-[#eee8f5]"
+                  } p-6 rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 border border-purple-500/10`}
+                >
+                  <div className="flex items-center gap-4 mb-2">
+                    <Image
+                      src={skill.image}
+                      alt={skill.title}
+                      width={52}
+                      height={52}
+                      className="rounded-lg"
+                    />
+                    <h4 className="text-xl font-semibold">{skill.title}</h4>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        ))}
       </section>
     </div>
   );

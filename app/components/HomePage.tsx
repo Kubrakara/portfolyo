@@ -10,7 +10,7 @@ const HomePage = () => {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  const roles = ["FullStack Devloper", "Web Developer", "Mobile Developer"];
+  const roles = ["FullStack Developer", "Web Developer", "Mobile Developer"];
   const [index, setIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
   const [reverse, setReverse] = useState(false);
