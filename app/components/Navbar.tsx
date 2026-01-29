@@ -82,7 +82,7 @@ export function Navbar() {
 
           {/* 🌙 Tema Geçiş Butonu */}
           <div className="hidden lg:flex">
-            <ThemeSwitch variant="navbar" />
+            <ThemeSwitch />
           </div>
 
           {/* 📱 Mobil Menü İkonu */}

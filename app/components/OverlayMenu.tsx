@@ -67,7 +67,7 @@ export function OverlayMenu({ isOpen, toggleMenu }: OverlayMenuProps) {
           </motion.div>
 
           {/* 🌙 Tema Geçişi */}
-          {mounted && <ThemeSwitch variant="menu" />}
+          {mounted && <ThemeSwitch />}
 
           {/* 🔙 Kapat Butonu */}
           <motion.button
