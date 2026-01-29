@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
-import { useTheme } from "next-themes";
+import { useThemeColors } from "@/lib/hooks/useThemeColors";
+import { Timeline } from "./Timeline";
+import { Stats } from "./Stats";
 import { motion } from "framer-motion";
 
 // Teknolojileri kategorilere göre gruplayın
@@ -26,9 +28,10 @@ const categories = [
     title: "Backend & Veri Tabanı Teknolojileri",
     skills: [
       { title: "Node.js", image: "/images/nodejs.png" },
+      { title: ".NET", image: "/images/dotnet.png" },
       { title: "Python", image: "/images/python.png" },
       { title: "Firebase", image: "/images/firebase.png" },
-      { title: "SQL", image: "/images/sql.png" },
+      { title: "SQL Server", image: "/images/sql-server.png" },
       { title: "MongoDB", image: "/images/mongodb.png" },
     ],
   },
@@ -47,6 +50,8 @@ const categories = [
     skills: [
       { title: "GitHub Copilot", image: "/images/github-copilot.png" },
       { title: "ChatGPT", image: "/images/chatgpt.png" },
+      { title: "Cursor", image: "/images/cursor.png" },
+      { title: "Antigravity", image: "/images/antigravity.png" },
       { title: "Gemini", image: "/images/gemini.png" },
       { title: "DeepSeek", image: "/images/deepseek.png" },
     ],
@@ -62,31 +67,24 @@ const categories = [
 ];
 
 const AboutMe: React.FC = () => {
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const { mounted, isDarkMode, colors } = useThemeColors();
 
   if (!mounted) return null;
 
-  const isDarkMode = (theme || "light") === "dark";
-
   return (
     <div
-      className={`flex flex-col items-center justify-center min-h-screen px-6 sm:px-10 md:px-16 lg:px-24 py-10 transition-all duration-300 ${
-        isDarkMode ? "text-white bg-[#110b1a]" : "bg-[#e9dff6] text-[#22192f]"
-      }`}
+      className="flex flex-col items-center justify-center min-h-screen px-6 sm:px-10 md:px-16 lg:px-24 py-10 transition-all duration-300"
+      style={{ backgroundColor: colors.background, color: colors.text }}
     >
       {/* 🚀 Üst Kısım - Hakkımda */}
       <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between w-full">
         <div className="relative w-full lg:w-1/2 flex justify-center">
           <Image
             src="/1ben.png"
-            alt="About Me"
+            alt="Hakkımda"
             width={360}
             height={360}
+            loading="lazy"
             className="rounded-full shadow-lg object-cover max-w-xs sm:max-w-sm md:max-w-md"
           />
         </div>
@@ -136,9 +134,8 @@ const AboutMe: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className={`${
-                    isDarkMode ? "bg-[#1c152a]" : "bg-[#eee8f5]"
-                  } p-6 rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 border border-purple-500/10`}
+                  className="p-6 rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 border border-purple-500/10"
+                  style={{ backgroundColor: colors.card }}
                 >
                   <div className="flex items-center gap-4 mb-2">
                     <Image
@@ -156,6 +153,32 @@ const AboutMe: React.FC = () => {
           </div>
         ))}
       </section>
+
+      {/* Stats Section */}
+      <Stats />
+
+      {/* Timeline Section */}
+      <Timeline />
+
+      {/* CTA Section */}
+      <motion.div
+        className="text-center mt-16 mb-8"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+      >
+        <Link href="/projects">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-white shadow-lg transition-all duration-300"
+            style={{ backgroundColor: colors.accent }}
+          >
+            Projelerimi Görüntüle
+            <FaArrowRight />
+          </motion.button>
+        </Link>
+      </motion.div>
     </div>
   );
 };

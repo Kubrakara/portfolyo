@@ -1,7 +1,7 @@
 "use client";
 
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useThemeColors } from "@/lib/hooks/useThemeColors";
 import { projects } from "@/data/projects";
 import ProjectCard from "../components/ProjectsCard";
 import { motion } from "framer-motion";
@@ -18,17 +18,10 @@ const categories = [
 ];
 
 export default function MyProjects() {
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const { mounted, isDarkMode, colors } = useThemeColors();
   const [selectedCategory, setSelectedCategory] = useState("Tümü");
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   if (!mounted) return null;
-
-  const isDarkMode = (theme || "light") === "dark";
 
   // Filtreleme işlemi
   const filteredProjects =
@@ -38,9 +31,8 @@ export default function MyProjects() {
 
   return (
     <section
-      className={`min-h-screen px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-10 transition-colors duration-300 ${
-        isDarkMode ? "bg-[#110b1a] text-white" : "bg-[#e9dff6] text-[#22192f]"
-      }`}
+      className="min-h-screen px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-10 transition-colors duration-300"
+      style={{ backgroundColor: colors.background, color: colors.text }}
     >
       <motion.h2
         className="text-3xl sm:text-4xl font-bold text-center mb-8"
@@ -57,13 +49,15 @@ export default function MyProjects() {
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
-            className={`px-4 py-2 rounded-full text-sm font-medium border transition-all ${
-              selectedCategory === cat
-                ? "bg-purple-600 text-white border-purple-600"
-                : isDarkMode
+            className={`px-4 py-2 rounded-full text-sm font-medium border transition-all ${selectedCategory === cat
+              ? "bg-purple-600 text-white border-purple-600"
+              : isDarkMode
                 ? "border-gray-600 text-white hover:bg-gray-800"
-                : "border-gray-300 text-black hover:bg-gray-200"
-            }`}
+                : "border-gray-300 hover:bg-gray-200"
+              }`}
+            style={{
+              color: selectedCategory !== cat ? colors.text : undefined,
+            }}
           >
             {cat}
           </button>

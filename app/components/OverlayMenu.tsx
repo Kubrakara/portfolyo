@@ -1,8 +1,9 @@
 "use client";
 
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
+import { useEffect } from "react";
+import { ThemeSwitch } from "./ThemeSwitch";
+import { useThemeColors } from "@/lib/hooks/useThemeColors";
+import { NAV_ITEMS } from "@/lib/constants";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
@@ -14,19 +15,14 @@ interface OverlayMenuProps {
 }
 
 export function OverlayMenu({ isOpen, toggleMenu }: OverlayMenuProps) {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const { mounted } = useThemeColors();
 
   useEffect(() => {
-    setMounted(true);
+    // Cleanup on unmount
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
   }, []);
-
-  const navItems = [
-    { label: "Anasayfa", href: "/" },
-    { label: "Hakkında", href: "/about" },
-    { label: "Projeler", href: "/projects" },
-    { label: "İletişim", href: "/contact" },
-  ];
 
   return (
     <AnimatePresence>
@@ -53,7 +49,7 @@ export function OverlayMenu({ isOpen, toggleMenu }: OverlayMenuProps) {
             }}
             className="flex flex-col items-center space-y-8 text-4xl uppercase"
           >
-            {navItems.map(({ label, href }) => (
+            {NAV_ITEMS.map(({ label, href }) => (
               <motion.div
                 key={label}
                 variants={{
@@ -71,34 +67,7 @@ export function OverlayMenu({ isOpen, toggleMenu }: OverlayMenuProps) {
           </motion.div>
 
           {/* 🌙 Tema Geçişi */}
-          {mounted && (
-            <motion.div
-              className="cursor-pointer mt-10 flex flex-col items-center space-y-2"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-            >
-              <div className="w-16 h-2 border-2 border-[#E1EBED] rounded-full bg-[#8121D0] relative">
-                <div
-                  className={cn(
-                    "absolute -top-[11px] -left-[13px] w-[26px] h-[26px] rounded-full shadow-md bg-[#E1EBED] transition-all duration-300",
-                    theme === "dark" && "left-[43px]"
-                  )}
-                />
-              </div>
-
-              <p className="font-semibold text-sm tracking-wider text-[#DCCFED]">
-                <span className={cn(theme === "dark" && "underline")}>
-                  light
-                </span>{" "}
-                -{" "}
-                <span className={cn(theme === "light" && "underline")}>
-                  dark
-                </span>
-              </p>
-            </motion.div>
-          )}
+          {mounted && <ThemeSwitch variant="menu" />}
 
           {/* 🔙 Kapat Butonu */}
           <motion.button
