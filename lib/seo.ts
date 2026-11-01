@@ -72,6 +72,9 @@ export function generateMetadata(): Metadata {
     icons: {
       icon: "/favicon.ico",
     },
+    verification: {
+      google: "lOLmkFpoF0zXpGKJ3mw_wAGITbabHn89CH7vrzBJrkA",
+    },
     metadataBase: new URL(siteConfig.url),
   };
 }
