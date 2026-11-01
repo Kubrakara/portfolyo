@@ -1,19 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { useThemeColors } from "@/lib/hooks/useThemeColors";
-import { FaPaperPlane, FaCheckCircle } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { FaPaperPlane } from "react-icons/fa";
+import { motion, useReducedMotion } from "motion/react";
 
-const ContactMe = () => {
-  const { mounted, colors } = useThemeColors();
-
+export default function ContactMe() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  if (!mounted) return null;
+  const prefersReducedMotion = useReducedMotion();
 
   const handleMailSend = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,192 +32,96 @@ const ContactMe = () => {
   };
 
   return (
-    <div
-      className="min-h-screen flex flex-col items-center justify-center px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-20 transition-all duration-300"
-      style={{ backgroundColor: colors.background }}
-    >
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-16 bg-background text-foreground transition-colors duration-300">
       <motion.div
         className="w-full max-w-2xl"
-        initial={{ opacity: 0, y: 30 }}
+        initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.5 }}
         viewport={{ once: true }}
       >
-        {/* Header */}
-        <div className="text-center mb-12">
-          <motion.h1
-            className="text-4xl sm:text-5xl font-bold mb-4"
-            style={{ color: colors.text }}
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            İletişime Geçin
-          </motion.h1>
-
-
+        {/* Başlık */}
+        <div className="text-center mb-10">
+          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-foreground mb-3">
+            İletişime <span className="text-accent">Geçin</span>
+          </h2>
+          <p className="text-base sm:text-lg text-muted max-w-md mx-auto">
+            Projeleriniz, iş teklifleri veya sadece bir merhaba demek için bana
+            yazabilirsiniz.
+          </p>
         </div>
 
-        {/* Form Card */}
-        <motion.div
-          className="rounded-2xl p-8 sm:p-10 shadow-2xl backdrop-blur-sm border"
-          style={{
-            backgroundColor: colors.card,
-            borderColor: `${colors.accent}30`,
-          }}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
+        {/* Form Kartı */}
+        <form
+          onSubmit={handleMailSend}
+          className="p-6 sm:p-10 rounded-3xl bg-card border border-border shadow-xl space-y-6"
         >
-          <form onSubmit={handleMailSend} className="space-y-6">
-            {/* Name Input */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4, delay: 0.4 }}
-              viewport={{ once: true }}
+          <div>
+            <label
+              htmlFor="name"
+              className="block text-sm font-semibold text-foreground mb-2"
             >
-              <label
-                className="block text-sm font-semibold mb-2"
-                style={{ color: colors.text }}
-              >
-                İsim Soyisim *
-              </label>
-              <input
-                type="text"
-                placeholder="Adınızı girin"
-                className="w-full px-4 py-3 rounded-lg transition-all duration-300 border-2 focus:outline-none"
-                style={{
-                  backgroundColor: colors.background,
-                  color: colors.text,
-                  borderColor: colors.card,
-                }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = colors.accent;
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = colors.card;
-                }}
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </motion.div>
+              Adınız Soyadınız
+            </label>
+            <input
+              id="name"
+              type="text"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Adınız"
+              className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent transition-all text-sm"
+            />
+          </div>
 
-            {/* Email Input */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4, delay: 0.5 }}
-              viewport={{ once: true }}
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-semibold text-foreground mb-2"
             >
-              <label
-                className="block text-sm font-semibold mb-2"
-                style={{ color: colors.text }}
-              >
-                Email *
-              </label>
-              <input
-                type="email"
-                placeholder="email@ornek.com"
-                className="w-full px-4 py-3 rounded-lg transition-all duration-300 border-2 focus:outline-none"
-                style={{
-                  backgroundColor: colors.background,
-                  color: colors.text,
-                  borderColor: colors.card,
-                }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = colors.accent;
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = colors.card;
-                }}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </motion.div>
+              E-posta Adresiniz
+            </label>
+            <input
+              id="email"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="ornek@email.com"
+              className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent transition-all text-sm"
+            />
+          </div>
 
-            {/* Message Textarea */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4, delay: 0.6 }}
-              viewport={{ once: true }}
+          <div>
+            <label
+              htmlFor="message"
+              className="block text-sm font-semibold text-foreground mb-2"
             >
-              <label
-                className="block text-sm font-semibold mb-2"
-                style={{ color: colors.text }}
-              >
-                Mesajınız *
-              </label>
-              <textarea
-                placeholder="Mesajınızı buraya yazın..."
-                rows={5}
-                className="w-full px-4 py-3 rounded-lg transition-all duration-300 border-2 focus:outline-none resize-none"
-                style={{
-                  backgroundColor: colors.background,
-                  color: colors.text,
-                  borderColor: colors.card,
-                }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = colors.accent;
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = colors.card;
-                }}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                required
-              />
-            </motion.div>
+              Mesajınız
+            </label>
+            <textarea
+              id="message"
+              required
+              rows={5}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Mesajınızı buraya yazabilirsiniz..."
+              className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent transition-all text-sm resize-y"
+            />
+          </div>
 
-            {/* Submit Button */}
-            <motion.button
+          <div className="pt-2">
+            <button
               type="submit"
               disabled={isSubmitting}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full py-4 rounded-lg font-semibold text-white transition-all duration-300 flex items-center justify-center gap-2 shadow-lg btn-ripple"
-              style={{
-                backgroundColor: isSubmitting ? colors.textMuted : colors.accent,
-                cursor: isSubmitting ? "not-allowed" : "pointer",
-              }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.7 }}
-              viewport={{ once: true }}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full font-semibold bg-accent text-accent-foreground shadow-lg hover:opacity-95 transition-all text-base min-h-[44px] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-60"
             >
-              {isSubmitting ? (
-                <>
-                  <FaCheckCircle className="animate-pulse" />
-                  Gönderiliyor...
-                </>
-              ) : (
-                <>
-                  <FaPaperPlane />
-                  Mesaj Gönder
-                </>
-              )}
-            </motion.button>
-          </form>
-        </motion.div>
-
-        {/* Contact Info */}
-        <motion.div
-          className="mt-12 text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          viewport={{ once: true }}
-        >
-
-        </motion.div>
+              <FaPaperPlane className="text-sm" aria-hidden="true" />
+              {isSubmitting ? "Gönderiliyor..." : "Mesaj Gönder"}
+            </button>
+          </div>
+        </form>
       </motion.div>
     </div>
   );
-};
-
-export default ContactMe;
+}

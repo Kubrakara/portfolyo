@@ -1,12 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useThemeColors } from "@/lib/hooks/useThemeColors";
 import { projects } from "@/data/projects";
-import ProjectCard from "../components/ProjectsCard";
-import { motion } from "framer-motion";
+import ProjectCard from "./ProjectsCard";
+import { motion, useReducedMotion } from "motion/react";
 
-// Tanımlı kategori listesi – tag'lere uygun olmalı
 const categories = [
   "Tümü",
   "Web",
@@ -15,60 +13,60 @@ const categories = [
   "AI",
   "Güvenlik",
   "Otomasyon",
-];
+] as const;
 
 export default function MyProjects() {
-  const { mounted, isDarkMode, colors } = useThemeColors();
-  const [selectedCategory, setSelectedCategory] = useState("Tümü");
+  const [selectedCategory, setSelectedCategory] = useState<string>("Tümü");
+  const prefersReducedMotion = useReducedMotion();
 
-  if (!mounted) return null;
-
-  // Filtreleme işlemi
   const filteredProjects =
     selectedCategory === "Tümü"
       ? projects
-      : projects.filter((project) => project.tags.includes(selectedCategory));
+      : projects.filter((project) =>
+          project.tags.some(
+            (tag) => tag.toLowerCase() === selectedCategory.toLowerCase()
+          )
+        );
 
   return (
-    <section
-      className="min-h-screen px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-10 transition-colors duration-300"
-      style={{ backgroundColor: colors.background, color: colors.text }}
-    >
-      <motion.h2
-        className="text-3xl sm:text-4xl font-bold text-center mb-8"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        Projelerim
-      </motion.h2>
+    <section className="min-h-screen px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-12 bg-background text-foreground transition-colors duration-300">
+      <div className="max-w-7xl mx-auto">
+        <motion.h2
+          className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 tracking-tight"
+          initial={prefersReducedMotion ? false : { opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Projelerim
+        </motion.h2>
 
-      {/* 🔘 Kategori Seçimi */}
-      <div className="flex flex-wrap justify-center gap-3 mb-10">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setSelectedCategory(cat)}
-            className={`px-4 py-2 rounded-full text-sm font-medium border transition-all ${selectedCategory === cat
-              ? "bg-purple-600 text-white border-purple-600"
-              : isDarkMode
-                ? "border-gray-600 text-white hover:bg-gray-800"
-                : "border-gray-300 hover:bg-gray-200"
-              }`}
-            style={{
-              color: selectedCategory !== cat ? colors.text : undefined,
-            }}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
+        {/* Kategori Seçimi */}
+        <div className="flex flex-wrap justify-center gap-2.5 mb-12">
+          {categories.map((cat) => {
+            const isSelected = selectedCategory === cat;
+            return (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-5 py-2 rounded-full text-sm font-semibold border transition-all duration-200 min-h-[40px] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                  isSelected
+                    ? "bg-accent text-accent-foreground border-accent shadow-sm"
+                    : "bg-card hover:bg-card-hover border-border text-foreground"
+                }`}
+              >
+                {cat}
+              </button>
+            );
+          })}
+        </div>
 
-      {/* 📦 Projeler */}
-      <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {filteredProjects.map((project, index) => (
-          <ProjectCard key={index} {...project} />
-        ))}
+        {/* Proje Kartları */}
+        <div className="grid gap-6 sm:gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {filteredProjects.map((project) => (
+            <ProjectCard key={project.id} {...project} />
+          ))}
+        </div>
       </div>
     </section>
   );

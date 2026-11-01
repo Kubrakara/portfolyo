@@ -2,75 +2,52 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { FaSun, FaMoon } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { Sun, Moon, Laptop } from "lucide-react";
+import { motion } from "motion/react";
+
+export type Theme = "light" | "dark" | "system";
 
 export function ThemeSwitch() {
-    const [mounted, setMounted] = useState(false);
-    const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
 
-    useEffect(() => {
-        setMounted(true);
-    }, []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-    if (!mounted) {
-        return (
-            <div className="w-16 h-8 rounded-full bg-gray-300 dark:bg-gray-700" />
-        );
-    }
+  const currentTheme = (theme as Theme) || "system";
 
-    const isDark = theme === "dark";
+  const cycleTheme = () => {
+    if (currentTheme === "light") setTheme("dark");
+    else if (currentTheme === "dark") setTheme("system");
+    else setTheme("light");
+  };
 
-    return (
-        <motion.button
-            onClick={() => setTheme(isDark ? "light" : "dark")}
-            className="relative w-16 h-8 rounded-full p-1 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2"
-            style={{
-                backgroundColor: isDark ? "#6D28D9" : "#A78BFA",
-            }}
-            whileTap={{ scale: 0.95 }}
-            aria-label="Toggle theme"
-        >
-            {/* Track gradient overlay */}
-            <div
-                className="absolute inset-0 rounded-full opacity-50"
-                style={{
-                    background: isDark
-                        ? "linear-gradient(to right, #4C1D95, #6D28D9)"
-                        : "linear-gradient(to right, #A78BFA, #C4B5FD)",
-                }}
-            />
+  const labels: Record<Theme, string> = {
+    light: "Açık tema (Koyu temaya geç)",
+    dark: "Koyu tema (Sistem temasına geç)",
+    system: "Sistem teması (Açık temaya geç)",
+  };
 
-            {/* Toggle thumb */}
-            <motion.div
-                className="relative z-10 w-6 h-6 rounded-full bg-white shadow-lg flex items-center justify-center"
-                animate={{
-                    x: isDark ? 32 : 0,
-                }}
-                transition={{
-                    type: "spring",
-                    stiffness: 500,
-                    damping: 30,
-                }}
-            >
-                {isDark ? (
-                    <FaMoon className="text-purple-600 text-xs" />
-                ) : (
-                    <FaSun className="text-yellow-500 text-xs" />
-                )}
-            </motion.div>
-
-            {/* Background icons */}
-            <div className="absolute inset-0 flex items-center justify-between px-2 pointer-events-none">
-                <FaSun
-                    className="text-white text-xs transition-opacity duration-300"
-                    style={{ opacity: isDark ? 0.3 : 0 }}
-                />
-                <FaMoon
-                    className="text-white text-xs transition-opacity duration-300"
-                    style={{ opacity: isDark ? 0 : 0.3 }}
-                />
-            </div>
-        </motion.button>
-    );
+  return (
+    <motion.button
+      type="button"
+      onClick={cycleTheme}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      aria-label={mounted ? labels[currentTheme] : "Tema değiştir"}
+      title={mounted ? labels[currentTheme] : "Tema değiştir"}
+      className="relative flex items-center justify-center min-w-[44px] min-h-[44px] w-11 h-11 rounded-full border border-border bg-card/80 hover:bg-card-hover text-foreground transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+    >
+      {!mounted ? (
+        <span className="w-5 h-5 rounded-full bg-muted/30" aria-hidden="true" />
+      ) : currentTheme === "light" ? (
+        <Sun className="w-5 h-5 text-accent" aria-hidden="true" />
+      ) : currentTheme === "dark" ? (
+        <Moon className="w-5 h-5 text-accent" aria-hidden="true" />
+      ) : (
+        <Laptop className="w-5 h-5 text-accent" aria-hidden="true" />
+      )}
+    </motion.button>
+  );
 }

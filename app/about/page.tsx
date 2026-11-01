@@ -1,12 +1,12 @@
-import React from "react";
+import type { Metadata } from "next";
 import AboutMe from "../components/AboutMe";
 
-const About = () => {
-  return (
-    <div>
-      <AboutMe></AboutMe>
-    </div>
-  );
+export const metadata: Metadata = {
+  title: "Hakkımda",
+  description:
+    "Kübra Kara hakkında detaylı bilgi, yetkinlikler, eğitim ve iş deneyimi.",
 };
 
-export default About;
+export default function AboutPage() {
+  return <AboutMe />;
+}

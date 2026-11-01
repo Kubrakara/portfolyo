@@ -1,178 +1,126 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { FaTimes, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import Image from "next/image";
-import { useThemeColors } from "@/lib/hooks/useThemeColors";
 import { useEffect } from "react";
+import type { Project } from "@/data/projects";
 
 interface ProjectModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    project: {
-        title: string;
-        description: string;
-        image: string;
-        tags: string[];
-        link?: string;
-        github?: string;
-        features?: string[];
-    };
+  isOpen: boolean;
+  onClose: () => void;
+  project: Project;
 }
 
 export function ProjectModal({ isOpen, onClose, project }: ProjectModalProps) {
-    const { colors, mounted } = useThemeColors();
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    if (isOpen) {
+      window.addEventListener("keydown", handleEsc);
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen, onClose]);
 
-    // Close on ESC key
-    useEffect(() => {
-        const handleEsc = (e: KeyboardEvent) => {
-            if (e.key === "Escape") onClose();
-        };
-        window.addEventListener("keydown", handleEsc);
-        return () => window.removeEventListener("keydown", handleEsc);
-    }, [onClose]);
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[90]"
+          />
 
-    // Prevent body scroll when modal is open
-    useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "unset";
-        }
-        return () => {
-            document.body.style.overflow = "unset";
-        };
-    }, [isOpen]);
+          {/* Modal Container */}
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.25 }}
+              className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl bg-card border border-border shadow-2xl text-foreground p-6 sm:p-8 my-auto"
+            >
+              {/* Close Button */}
+              <button
+                type="button"
+                onClick={onClose}
+                className="absolute top-4 right-4 p-2.5 rounded-full bg-card hover:bg-card-hover border border-border text-foreground transition-all z-10 min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                aria-label="Kapat"
+              >
+                <FaTimes size={18} aria-hidden="true" />
+              </button>
 
-    if (!mounted) return null;
+              {/* Görsel */}
+              <div className="relative w-full h-56 sm:h-80 mb-6 rounded-2xl overflow-hidden bg-muted/10 border border-border/50">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 768px"
+                  className="object-cover"
+                />
+              </div>
 
-    return (
-        <AnimatePresence>
-            {isOpen && (
-                <>
-                    {/* Backdrop */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        onClick={onClose}
-                        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999]"
-                    />
+              {/* Başlık */}
+              <h3 className="text-2xl sm:text-3xl font-bold mb-3 text-foreground tracking-tight">
+                {project.title}
+              </h3>
 
-                    {/* Modal */}
-                    <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl"
-                            style={{ backgroundColor: colors.background }}
-                        >
-                            {/* Close Button */}
-                            <button
-                                onClick={onClose}
-                                className="modal-close absolute top-4 right-4 p-2 rounded-full transition-all duration-200 z-[10001] hover:scale-110"
-                                style={{ backgroundColor: colors.card, color: colors.text, cursor: 'pointer' }}
-                                aria-label="Close modal"
-                            >
-                                <FaTimes size={20} />
-                            </button>
+              {/* Etiketler */}
+              <div className="flex flex-wrap gap-2 mb-6">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 text-xs rounded-full font-medium bg-accent/15 text-accent"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
 
-                            {/* Content */}
-                            <div className="p-8">
-                                {/* Image */}
-                                <div className="relative w-full h-64 md:h-96 mb-6 rounded-xl overflow-hidden">
-                                    <Image
-                                        src={project.image}
-                                        alt={project.title}
-                                        fill
-                                        className="object-cover"
-                                    />
-                                </div>
+              {/* Açıklama */}
+              <div className="text-base text-muted leading-relaxed mb-8">
+                <p>{project.description}</p>
+              </div>
 
-                                {/* Title */}
-                                <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: colors.text }}>
-                                    {project.title}
-                                </h2>
-
-                                {/* Tags */}
-                                <div className="flex flex-wrap gap-2 mb-6">
-                                    {project.tags.map((tag, index) => (
-                                        <span
-                                            key={index}
-                                            className="px-3 py-1 rounded-full text-sm font-medium"
-                                            style={{
-                                                backgroundColor: `${colors.accent}20`,
-                                                color: colors.accent,
-                                            }}
-                                        >
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-
-                                {/* Description */}
-                                <p className="text-lg mb-6 leading-relaxed" style={{ color: colors.textMuted }}>
-                                    {project.description}
-                                </p>
-
-                                {/* Features */}
-                                {project.features && project.features.length > 0 && (
-                                    <div className="mb-6">
-                                        <h3 className="text-xl font-semibold mb-3" style={{ color: colors.text }}>
-                                            Temel Özellikler
-                                        </h3>
-                                        <ul className="space-y-2">
-                                            {project.features.map((feature, index) => (
-                                                <li
-                                                    key={index}
-                                                    className="flex items-start gap-2"
-                                                    style={{ color: colors.textMuted }}
-                                                >
-                                                    <span style={{ color: colors.accent }}>•</span>
-                                                    {feature}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                )}
-
-                                {/* Buttons */}
-                                <div className="flex flex-wrap gap-4">
-                                    {project.link && (
-                                        <a
-                                            href={project.link}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white transition-all duration-300 hover:scale-105"
-                                            style={{ backgroundColor: colors.accent, cursor: 'pointer' }}
-                                        >
-                                            <FaExternalLinkAlt />
-                                            Canlı Demo
-                                        </a>
-                                    )}
-                                    {project.github && (
-                                        <a
-                                            href={project.github}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold border-2 transition-all duration-300 hover:scale-105"
-                                            style={{
-                                                borderColor: colors.accent,
-                                                color: colors.accent,
-                                                cursor: 'pointer'
-                                            }}
-                                        >
-                                            <FaGithub />
-                                            Kodu Görüntüle
-                                        </a>
-                                    )}
-                                </div>
-                            </div>
-                        </motion.div>
-                    </div>
-                </>
-            )}
-        </AnimatePresence>
-    );
+              {/* Aksiyon Butonları */}
+              <div className="flex flex-wrap gap-3 pt-4 border-t border-border">
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-semibold bg-accent text-accent-foreground shadow-md hover:opacity-95 transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
+                  >
+                    <FaExternalLinkAlt size={14} aria-hidden="true" />
+                    Canlı Önizleme
+                  </a>
+                )}
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-semibold border border-border bg-card hover:bg-card-hover text-foreground transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
+                  >
+                    <FaGithub size={16} aria-hidden="true" />
+                    Kaynak Kod
+                  </a>
+                )}
+              </div>
+            </motion.div>
+          </div>
+        </>
+      )}
+    </AnimatePresence>
+  );
 }

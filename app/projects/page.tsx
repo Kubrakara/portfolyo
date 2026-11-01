@@ -1,12 +1,12 @@
-import React from "react";
+import type { Metadata } from "next";
 import MyProjects from "../components/MyProjects";
 
-const Projects = () => {
-  return (
-    <div className="mt-14">
-      <MyProjects></MyProjects>
-    </div>
-  );
+export const metadata: Metadata = {
+  title: "Projeler",
+  description:
+    "Kübra Kara tarafından geliştirilen web, mobil ve yapay zeka projeleri.",
 };
 
-export default Projects;
+export default function ProjectsPage() {
+  return <MyProjects />;
+}

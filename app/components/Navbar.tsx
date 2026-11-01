@@ -1,40 +1,25 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { OverlayMenu } from "./OverlayMenu";
 import { ThemeSwitch } from "./ThemeSwitch";
-import { useThemeColors } from "@/lib/hooks/useThemeColors";
-import { GRADIENTS, NAVBAR_COLORS, NAV_ITEMS } from "@/lib/constants";
+import { NAV_ITEMS } from "@/lib/constants";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const { mounted, isDarkMode } = useThemeColors();
-
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-
-    checkScreenSize();
-    window.addEventListener("resize", checkScreenSize);
-    return () => window.removeEventListener("resize", checkScreenSize);
-  }, []);
 
   const toggleMenu = () => {
     setIsOpen((prev) => {
       const next = !prev;
-      document.body.classList.toggle("overflow-hidden", next);
+      if (typeof document !== "undefined") {
+        document.body.classList.toggle("overflow-hidden", next);
+      }
       return next;
     });
   };
-
-  // Hydration hatasını önlemek için mounted kontrolü
-  if (!mounted) return null;
 
   return (
     <>
@@ -42,63 +27,51 @@ export function Navbar() {
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className={`fixed w-full top-0 left-0 z-50 py-5 shadow-lg bg-gradient-to-r ${isDarkMode ? GRADIENTS.navbar.dark : GRADIENTS.navbar.light
-          } ${isDarkMode ? "bg-[80%]" : "bg-[20%]"}`}
+        className="fixed w-full top-0 left-0 z-50 py-4 shadow-lg bg-gradient-to-r from-nav-from via-nav-via to-nav-to"
       >
-        <div className="relative flex justify-between items-center w-[calc(100%-100px)] mx-auto">
-          {/* 🚀 Logo */}
+        <div className="flex justify-between items-center w-[calc(100%-48px)] sm:w-[calc(100%-80px)] max-w-7xl mx-auto">
+          {/* Logo */}
           <Link
             href="/"
-            className="font-black text-2xl uppercase tracking-wider transition-all hover:opacity-90 text-[#E1EBED]"
+            className="font-black text-2xl uppercase tracking-wider transition-opacity hover:opacity-90 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg px-1"
           >
-            <span
-              className={`duration-200`}
-              style={{
-                color: isDarkMode
-                  ? NAVBAR_COLORS.logoFirst.dark
-                  : NAVBAR_COLORS.logoFirst.light,
-              }}
-            >
-              Kübra
-            </span>
-            <span style={{ color: NAVBAR_COLORS.logoSecond }}>Kara</span>
+            <span className="text-nav-logo">Kübra</span>
+            <span className="text-nav-logo-sub">Kara</span>
           </Link>
 
-          <nav className="hidden lg:flex space-x-6 text-[#E1EBED] text-xl font-semibold">
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center space-x-2 text-lg font-semibold">
             {NAV_ITEMS.map(({ label, href }) => (
-              <Link key={href} href={href}>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="nav-link px-4 py-2 rounded-lg transition-all font-medium"
-                  style={{ color: NAVBAR_COLORS.buttonText[isDarkMode ? 'dark' : 'light'] }}
-                  aria-label={`Navigate to ${label}`}
-                >
-                  {label}
-                </motion.button>
+              <Link
+                key={href}
+                href={href}
+                className="nav-link px-4 py-2 rounded-lg font-medium text-nav-text hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                {label}
               </Link>
             ))}
           </nav>
 
-          {/* 🌙 Tema Geçiş Butonu */}
-          <div className="hidden lg:flex">
-            <ThemeSwitch />
-          </div>
+          {/* Actions */}
+          <div className="flex items-center gap-3">
+            <div className="hidden lg:flex">
+              <ThemeSwitch />
+            </div>
 
-          {/* 📱 Mobil Menü İkonu */}
-          {isMobile && (
+            {/* Mobile Menu Toggle Button */}
             <button
-              className="cursor-pointer p-3.5 text-white"
+              type="button"
+              className="lg:hidden p-2 text-nav-text hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-lg min-w-[44px] min-h-[44px] flex items-center justify-center"
               onClick={toggleMenu}
-              aria-label="Open mobile menu"
+              aria-label={isOpen ? "Menüyü kapat" : "Menüyü aç"}
             >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+              {isOpen ? <X size={26} aria-hidden="true" /> : <Menu size={26} aria-hidden="true" />}
             </button>
-          )}
+          </div>
         </div>
       </motion.header>
 
-      {/* 📱 Overlay Menü */}
+      {/* Mobile Drawer Menu */}
       <OverlayMenu isOpen={isOpen} toggleMenu={toggleMenu} />
     </>
   );

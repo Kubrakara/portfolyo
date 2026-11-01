@@ -1,30 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
-import { useThemeColors } from "@/lib/hooks/useThemeColors";
 import { ProjectModal } from "./ProjectModal";
+import type { Project } from "@/data/projects";
 
-interface ProjectProps {
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-  link?: string;
-  github?: string;
-  features?: string[];
-}
-
-export default function ProjectCard(props: ProjectProps) {
-  const { colors, mounted } = useThemeColors();
+export default function ProjectCard(props: Project) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
-
-  if (!mounted) return null;
+  const prefersReducedMotion = useReducedMotion();
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (prefersReducedMotion) return;
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -33,8 +22,8 @@ export default function ProjectCard(props: ProjectProps) {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateXValue = ((y - centerY) / centerY) * -10;
-    const rotateYValue = ((x - centerX) / centerX) * 10;
+    const rotateXValue = ((y - centerY) / centerY) * -6;
+    const rotateYValue = ((x - centerX) / centerX) * 6;
 
     setRotateX(rotateXValue);
     setRotateY(rotateYValue);
@@ -48,63 +37,60 @@ export default function ProjectCard(props: ProjectProps) {
   return (
     <>
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.4 }}
         viewport={{ once: true }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         onClick={() => setIsModalOpen(true)}
-        className="relative group rounded-2xl p-[2px] bg-gradient-to-tr from-purple-500 via-pink-500 to-blue-500 cursor-pointer"
-        style={{
-          transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-          transition: "transform 0.1s ease-out",
-        }}
+        className="group rounded-2xl border border-border bg-card hover:bg-card-hover p-4 sm:p-5 flex flex-col justify-between shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer focus-within:ring-2 focus-within:ring-accent"
+        style={
+          prefersReducedMotion
+            ? undefined
+            : {
+                transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+                transition: "transform 0.15s ease-out, box-shadow 0.2s ease",
+              }
+        }
       >
-        <div
-          className="rounded-2xl h-full p-5 flex flex-col justify-between group-hover:scale-[1.02] transition-transform duration-300"
-          style={{ backgroundColor: colors.card }}
-        >
-          {/* Image */}
-          <div className="w-full h-40 relative rounded-lg overflow-hidden mb-4 border border-white/10">
+        <div>
+          {/* Görsel */}
+          <div className="w-full h-48 relative rounded-xl overflow-hidden mb-4 bg-muted/10 border border-border/50">
             <Image
               src={props.image}
               alt={props.title}
               fill
-              className="object-cover group-hover:scale-110 transition-transform duration-500"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
             />
           </div>
 
-          {/* Title & Description */}
-          <h3 className="text-xl font-bold mb-2" style={{ color: colors.text }}>
+          {/* Başlık & Açıklama */}
+          <h3 className="text-xl font-bold mb-2 text-foreground group-hover:text-accent transition-colors">
             {props.title}
           </h3>
-          <p className="text-sm mb-4 line-clamp-2" style={{ color: colors.textMuted }}>
+          <p className="text-sm text-muted mb-4 line-clamp-3 leading-relaxed">
             {props.description}
           </p>
+        </div>
 
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2 mb-5">
-            {props.tags.map((tag, idx) => (
+        <div>
+          {/* Etiketler */}
+          <div className="flex flex-wrap gap-1.5 mb-5">
+            {props.tags.map((tag) => (
               <span
-                key={idx}
-                className="px-3 py-1 text-xs rounded-full font-medium"
-                style={{
-                  backgroundColor: `${colors.accent}20`,
-                  color: colors.accent,
-                }}
+                key={tag}
+                className="px-2.5 py-1 text-xs rounded-full font-medium bg-accent/15 text-accent"
               >
                 {tag}
               </span>
             ))}
           </div>
 
-          {/* Click to view indicator */}
-          <div
-            className="mt-auto text-sm font-semibold flex items-center gap-2"
-            style={{ color: colors.accent }}
-          >
-            Detayları görmek için tıklayın →
+          {/* Tıklama İpucu */}
+          <div className="text-sm font-semibold text-accent flex items-center gap-1.5 pt-2 border-t border-border/60">
+            Detayları Gör →
           </div>
         </div>
       </motion.div>
@@ -118,4 +104,3 @@ export default function ProjectCard(props: ProjectProps) {
     </>
   );
 }
-

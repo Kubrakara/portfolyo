@@ -1,14 +1,27 @@
-export const projects = [
+export interface Project {
+  readonly id: string;
+  readonly title: string;
+  readonly description: string;
+  readonly image: string;
+  readonly tags: readonly string[];
+  readonly liveUrl?: string;
+  readonly githubUrl?: string;
+  readonly features?: readonly string[];
+}
+
+export const projects: readonly Project[] = [
   {
+    id: "shieldera",
     title: "Shielera: Çok Platformlu Güvenlik ve Yönetim Uygulaması",
     description:
       "Shielera, dosya güvenliği, parola yönetimi ve masaüstü kontrol sistemini bir araya getiren kapsamlı bir güvenlik uygulamasıdır. Python, React Native Expo ve Next.js kullanılarak geliştirilmiştir.",
     image: "/proje/shieldera.png",
     tags: ["Python", "React Native", "Next.js", "Firebase", "Güvenlik"],
     liveUrl: "https://shielderaweb.vercel.app/",
-    githubUrl: "https://github.com/your-repo",
+    githubUrl: "https://github.com/Kubrakara",
   },
   {
+    id: "python-bot",
     title: "Python Otomatik Görsel/Doküman İndirme Botu",
     description:
       "Günlük olarak güncellenen görselleri otomatik olarak indiren Python tabanlı bir bot. Selenium kullanarak web üzerinde otomatik gezinme ve dosya indirme işlemlerini gerçekleştirir.",
@@ -16,6 +29,7 @@ export const projects = [
     tags: ["Python", "Selenium", "Web Scraping", "Otomasyon"],
   },
   {
+    id: "e-imza",
     title: "Esnafeimza.com.tr – E-İmza Başvuru Platformu",
     description:
       "Kullanıcıların e-imza başvurularını online olarak tamamlamasına olanak tanıyan bir platform. Başvurular Google Sheets ve Google Drive ile entegre çalışmaktadır.",
@@ -25,6 +39,7 @@ export const projects = [
     githubUrl: "https://github.com/Kubrakara/EsnafE-imza",
   },
   {
+    id: "vuln-detect",
     title: "Code-Vuln-Detect-Tool – Zafiyetli Kod Analizi",
     description:
       "Kodlardaki güvenlik açıklarını analiz eden ve potansiyel riskleri tespit eden bir makine öğrenmesi uygulaması. Python ve Jupyter Notebook kullanılarak geliştirilmiştir.",
@@ -39,6 +54,7 @@ export const projects = [
     githubUrl: "https://github.com/Kubrakara/Code-Vuln-Detect-Tool",
   },
   {
+    id: "gurme-ai",
     title: "GurmeAI – Yapay Zeka Destekli Yemek Tarifi Platformu",
     description:
       "Kullanıcıların malzemelerine göre yapay zeka destekli yemek tarifleri almasını sağlayan web platformu. Next.js ve Google Gemini API kullanılarak geliştirilmiştir.",
@@ -55,6 +71,7 @@ export const projects = [
     githubUrl: "https://github.com/Kubrakara/GurmeAi",
   },
   {
+    id: "spotlight-app",
     title: "Instagram Benzeri Mobil Uygulama – React Native Expo",
     description:
       "React Native Expo ile geliştirilen, kullanıcıların fotoğraf ve video paylaşabileceği, sosyal medya etkileşimleri sunan bir uygulama. Firebase entegrasyonu ile gerçek zamanlı veri yönetimi sağlar.",
@@ -63,10 +80,11 @@ export const projects = [
     githubUrl: "https://github.com/Kubrakara/SpotLIght-App",
   },
   {
+    id: "api-docker",
     title: "Docker Destekli Otomatik API Dokümantasyon ve Test Aracı",
     description:
       "Swagger/OpenAPI dokümanları üzerinden otomatik test, yük testi, loglama, görsel raporlama ve AI destekli açıklamalar sağlayan Docker tabanlı kapsamlı bir araç. FastAPI, Next.js ve Gemini API entegrasyonu ile geliştirildi.",
-    image: "/proje/apidökümantasyon.png",
+    image: "/proje/apidocker.png",
     tags: [
       "FastAPI",
       "Node.js",
@@ -78,10 +96,11 @@ export const projects = [
       "Test Otomasyonu",
       "Load Test",
     ],
-    liveUrl: "https://your-live-site.com",
+    liveUrl: "https://shielderaweb.vercel.app/",
     githubUrl: "https://github.com/Kubrakara/OtomatikApiTestAraci",
   },
   {
+    id: "afet-scope",
     title: "FEMA API Tabanlı Afet Bilgilendirme Mobil Uygulaması",
     description:
       "FEMA'nın Disaster Declarations API'sini kullanarak afet verilerini anlık olarak çeken ve kullanıcıları mobil bildirimlerle bilgilendiren React Native Expo tabanlı mobil uygulama.",
@@ -90,8 +109,8 @@ export const projects = [
     githubUrl: "https://github.com/Kubrakara/AlertScope",
   },
   {
-    title:
-      "Ağ Anomali Tespiti – Makine Öğrenmesi ile DDOS ve Brute Force Analizi",
+    id: "anomali-detect",
+    title: "Ağ Anomali Tespiti – Makine Öğrenmesi ile DDOS ve Brute Force Analizi",
     description:
       "Kaggle üzerindeki ağ trafiği veri seti kullanılarak, Python ile geliştirilen makine öğrenmesi modeli sayesinde DDOS, Brute Force gibi saldırılar gerçek zamanlı olarak tespit edilmektedir.",
     image: "/proje/anomali.png",
@@ -102,6 +121,6 @@ export const projects = [
       "Network Analysis",
       "Jupyter Notebook",
     ],
-    githubUrl: "https://github.com/your-repo",
+    githubUrl: "https://github.com/Kubrakara",
   },
-];
+] as const;

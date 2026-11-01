@@ -1,12 +1,12 @@
-import React from "react";
+import type { Metadata } from "next";
 import ContactMe from "../components/ContactMe";
 
-const Contact = () => {
-  return (
-    <div>
-      <ContactMe></ContactMe>
-    </div>
-  );
+export const metadata: Metadata = {
+  title: "İletişim",
+  description:
+    "Kübra Kara ile iletişime geçin. Proje teklifleri ve iş birlikleri için mesaj gönderin.",
 };
 
-export default Contact;
+export default function ContactPage() {
+  return <ContactMe />;
+}
