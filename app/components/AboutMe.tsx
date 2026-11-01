@@ -19,53 +19,49 @@ export interface SkillCategory {
 
 const categories: readonly SkillCategory[] = [
   {
-    title: "Web & Mobil Teknolojileri",
+    title: "Frontend & Mobil Geliştirme",
     skills: [
       { title: "React", image: "/images/react.png" },
       { title: "React Native", image: "/images/react-native.png" },
-      { title: "Expo", image: "/images/expo.png" },
       { title: "Next.js", image: "/images/nextjs.png" },
+      { title: "TypeScript", image: "/images/typescript.png" },
+      { title: "JavaScript", image: "/images/javascript.png" },
+      { title: "Expo", image: "/images/expo.png" },
       { title: "TailwindCSS", image: "/images/tailwind.png" },
       { title: "Shadcn UI", image: "/images/shadcnui.png" },
-      { title: "Kotlin", image: "/images/kotlin.png" },
-      { title: "Android Studio", image: "/images/android-studio.png" },
     ],
   },
   {
-    title: "Backend & Veri Tabanı Teknolojileri",
+    title: "Backend & Veritabanı Mimarisi",
     skills: [
       { title: "Node.js", image: "/images/nodejs.png" },
       { title: ".NET", image: "/images/dotnet.png" },
       { title: "Python", image: "/images/python.png" },
       { title: "Firebase", image: "/images/firebase.png" },
       { title: "SQL Server", image: "/images/sql-server.png" },
+      { title: "SQL", image: "/images/sql.png" },
       { title: "MongoDB", image: "/images/mongodb.png" },
     ],
   },
   {
-    title: "Entegrasyon & Reklam Araçları",
+    title: "DevOps, Sistem & Dağıtım",
     skills: [
+      { title: "Linux / Ubuntu", image: "/images/linux.png" },
+      { title: "Google Play Store", image: "/images/play.png" },
+      { title: "Vercel", image: "/images/vercel.png" },
       { title: "Render", image: "/images/render.png" },
-      { title: "Google Ads", image: "/images/google-ads.png" },
       { title: "Google AdMob", image: "/images/google-admob.png" },
     ],
   },
   {
-    title: "Yapay Zeka Destekli Geliştirme Araçları",
+    title: "Yapay Zeka & Modern Mühendislik Araçları",
     skills: [
-      { title: "GitHub Copilot", image: "/images/github-copilot.png" },
-      { title: "ChatGPT", image: "/images/chatgpt.png" },
       { title: "Cursor", image: "/images/cursor.png" },
-      { title: "Antigravity", image: "/images/antigravity.png" },
       { title: "Gemini", image: "/images/gemini.png" },
+      { title: "ChatGPT", image: "/images/chatgpt.png" },
+      { title: "GitHub Copilot", image: "/images/github-copilot.png" },
       { title: "DeepSeek", image: "/images/deepseek.png" },
-    ],
-  },
-  {
-    title: "Yayınlama & Platformlar",
-    skills: [
-      { title: "Vercel", image: "/images/vercel.png" },
-      { title: "Google Play", image: "/images/play.png" },
+      { title: "Antigravity", image: "/images/antigravity.png" },
     ],
   },
 ];
@@ -95,18 +91,11 @@ export default function AboutMe() {
             Neler <span className="text-accent">yapıyorum?</span>
           </h2>
           <p className="mt-6 text-base sm:text-lg text-muted leading-relaxed">
-            Bilgisayar Mühendisliği eğitimi alarak yazılım geliştirme ve siber
-            güvenlik konularında uzmanlaştım. Çeşitli projelerde web ve mobil
-            uygulama geliştirme, API tasarımı, veri güvenliği ve makine
-            öğrenmesi gibi alanlarda çalışmalar yaptım. Siber güvenlik alanında{" "}
-            <strong className="text-foreground">SiberVatan</strong> projesinde bulunarak eğitimler aldım ve{" "}
-            <strong className="text-foreground">Linux, güvenlik testleri, zafiyet analizi</strong>{" "}
-            konularında uzmanlaştım. Modern teknolojilerle frontend ve backend
-            geliştirme yaparak{" "}
-            <strong className="text-foreground">Next.js, React, React Native, TypeScript</strong> gibi
-            araçları etkin şekilde kullandım. Projelerim ve çalışmalarım
-            hakkında daha fazla bilgi almak için benimle iletişime
-            geçebilirsiniz.
+            <strong className="text-foreground">React, React Native ve Node.js</strong> ile modern web ve mobil ekosisteminde uçtan uca ürünler geliştiriyorum.{" "}
+            <strong className="text-foreground">NGSTECH</strong> ve{" "}
+            <strong className="text-foreground">Progim</strong> bünyesinde e-ticaret, SaaS ve mobil projelerde frontend, backend, deployment ve canlı sistem süreçlerinin tamamında aktif rol aldım.{" "}
+            <strong className="text-foreground">Docker, Nginx ve Linux VPS</strong> altyapılarını bizzat yapılandırıp yönetirken; yapay zeka destekli modern geliştirme araçlarını (<strong className="text-foreground">Cursor, Claude, Gemini</strong>) iş akışlarıma etkin biçimde entegre ediyorum.{" "}
+            Bilgisayar Mühendisliği mezuniyetim ve <strong className="text-foreground">Siber Vatan</strong> geçmişimle birlikte güvenli, ölçeklenebilir ve yüksek performanslı çözümler üretiyorum.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 mt-8">

@@ -12,7 +12,7 @@ export function HeroBottom() {
 
   return (
     <div className="w-full flex flex-col items-center gap-10 sm:gap-12 pt-6">
-      {/* 3 İstatistik Kartı (Yer Tutucu) */}
+      {/* 3 Öne Çıkan İstatistik Kartı */}
       <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
         {HERO_STATS.map((stat, idx) => (
           <motion.div

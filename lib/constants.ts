@@ -29,7 +29,7 @@ export const SOCIAL_LINKS = [
   },
   {
     name: "LinkedIn",
-    url: "https://www.linkedin.com/in/k%C3%BCbra-kara-394850/",
+    url: "https://www.linkedin.com/in/kubra-karaa",
     label: "Kübra Kara LinkedIn Profilini Ziyaret Et",
   },
   {
@@ -47,8 +47,9 @@ export const NAV_ITEMS = [
 ] as const satisfies readonly NavItem[];
 
 export const HERO_ROLES = [
-  "Mobil Uygulama Geliştirici",
-  "React Native ve Next.js",
+  "Full-Stack Yazılım Geliştirici",
+  "React & React Native Geliştirici",
+  "Node.js & Bulut Sistemleri",
 ] as const satisfies readonly string[];
 
 export const HERO_CHIPS = [
@@ -71,30 +72,33 @@ export const HERO_CHIPS = [
 
 export const HERO_STATS = [
   {
-    value: "[YER TUTUCU]",
-    label: "Mobil & Web Projesi",
-    detail: "Kullanıcı Odaklı Çözümler",
+    value: "10+",
+    label: "Canlı & Açık Kaynak Proje",
+    detail: "4 Google Play & SaaS Çözümleri",
   },
   {
-    value: "[YER TUTUCU]",
-    label: "Kod Mimarisi",
-    detail: "Temiz ve Ölçeklenebilir Yapı",
+    value: "Full-Stack",
+    label: "Uçtan Uca Mimari",
+    detail: "Frontend, Backend & DevOps",
   },
   {
-    value: "[YER TUTUCU]",
-    label: "Geliştirme Deneyimi",
-    detail: "Modern Teknolojiler",
+    value: "2+",
+    label: "Yıl Geliştirme Deneyimi",
+    detail: "Web, Mobil & Bulut Altyapısı",
   },
 ] as const satisfies readonly HeroStat[];
 
 export const TECH_STACK_ITEMS = [
+  "React",
   "React Native",
   "Next.js",
-  "TypeScript",
-  "Tailwind CSS",
-  "React",
   "Node.js",
-  "Expo",
+  "TypeScript",
+  "Docker",
+  "Nginx",
+  ".NET",
+  "Tailwind CSS",
   "Firebase",
-  "Git & GitHub",
+  "Linux / VPS",
+  "Git & CI/CD",
 ] as const satisfies readonly string[];

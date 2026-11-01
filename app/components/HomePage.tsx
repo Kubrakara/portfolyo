@@ -70,12 +70,13 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Somut Açıklama (En fazla 2 cümle, [YER TUTUCU] içeren) */}
+            {/* Profesyonel Özet */}
             <p className="text-base sm:text-lg text-muted font-normal max-w-2xl leading-relaxed">
-              React Native ve Next.js ile kullanıcı deneyimini merkeze alan,
-              yüksek performanslı mobil ve web çözümleri geliştiriyorum. Temiz
-              mimari standartları ve [YER TUTUCU] prensipleriyle modern arayüzleri
-              ölçeklenebilir ürünlere dönüştürüyorum.
+              React, React Native ve Node.js ile kullanıcı deneyimini merkeze
+              alan, yüksek performanslı web ve mobil ürünler geliştiriyorum.
+              Frontend ve backend entegrasyonlarından Docker, Nginx ve bulut
+              altyapısına kadar uçtan uca mimarilerle fikirleri ölçeklenebilir
+              canlı sistemlere dönüştürüyorum.
             </p>
 
             {/* CTA Butonları (Doğrudan Link / a stilleri, buton sarmalayıcısız) */}

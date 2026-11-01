@@ -15,33 +15,74 @@ export interface TimelineItem {
 const timelineData: readonly TimelineItem[] = [
   {
     type: "work",
-    title: "Full Stack Developer",
-    organization: "Progim",
-    period: "2025 Eylül - 2026 Ocak",
-    description: "Full Stack Developer olarak modern web teknolojileri ile geliştirme.",
+    title: "Full-Stack Yazılım Geliştirici",
+    organization: "NGSTECH Yazılım",
+    period: "03/2026 – 08/2026",
+    location: "Samsun / Uzaktan",
+    description:
+      "3+ web ve e-ticaret projesinde React ve Vite ile modern arayüzler ve REST API entegrasyonu. React Native ve Node.js ile mobil uygulama mimarisi, mağaza yayınlama. Docker, Nginx, VPS ve n8n ile deployment ve CI/CD süreçleri.",
   },
   {
-    type: "certificate",
-    title: "SiberVatan Eğitim Programı",
-    organization: "SiberVatan",
-    period: "2023",
-    description: "Linux, güvenlik testleri ve zafiyet analizi eğitimleri.",
+    type: "work",
+    title: "Full-Stack Yazılım Geliştirici",
+    organization: "Progim",
+    period: "09/2025 – 02/2026",
+    location: "Eskişehir",
+    description:
+      "Yalın dönüşüm Ar-Ge projesinde React frontend ve .NET backend geliştirme; iş analizi ve teknik gereksinim belirleme. Büyük veri setlerinin listelenmesi, filtrelenmesi ve raporlanmasına yönelik yüksek performanslı çözümler.",
   },
   {
     type: "education",
-    title: "Bilgisayar Mühendisliği",
+    title: "Bilgisayar Mühendisliği (Lisans)",
     organization: "Zonguldak Bülent Ecevit Üniversitesi",
-    period: "2022 - 2025",
-    description: "Yazılım geliştirme ve siber güvenlik konularında uzmanlaştım.",
+    period: "2022 – 2025 (Mezuniyet: 06/2025)",
     location: "Zonguldak",
+    description:
+      "Mezuniyet Projesi: Qt ve Python ile dosya şifreleme/çözme özellikli güvenlik odaklı kriptografi masaüstü uygulaması. Odak: Yazılım Mimarisi, Veritabanı Sistemleri, Kriptografi ve Uygulama Güvenliği.",
+  },
+  {
+    type: "certificate",
+    title: "STARTUP 2025 & KOSGEB Girişimcilik Sertifikası",
+    organization: "Zonguldak Teknopark & Marmara Teknokent",
+    period: "12/2024 – 04/2025",
+    description:
+      "STARTUP 2025 Ürün Maratonu ve KOSGEB Girişimcilik İş Modeli Sertifikası (Doğrulama: KSB01UGE0112961846).",
+  },
+  {
+    type: "work",
+    title: "Siber Güvenlik & Yazılım Geliştirici (Stajyer)",
+    organization: "CyberNova Siber Güvenlik",
+    period: "08/2024 – 09/2024",
+    location: "Samsun",
+    description:
+      "Kriptografi tabanlı masaüstü uygulamalar; Qt ve Python ile GUI tabanlı yazılımlar ve SQL tabanlı veri yönetimi.",
+  },
+  {
+    type: "certificate",
+    title: "Siber Vatan BootCamp & Eğitim Sertifikası",
+    organization: "Siber Vatan (Trendyol, Barikat, Cyrops, BG-TEK)",
+    period: "11/2022 – 09/2023",
+    location: "Antalya / Çevrimiçi",
+    description:
+      "10 günlük uygulamalı siber güvenlik kampı ve 10 aylık yoğun program: Linux & CEH, Sızma Testi, Tersine Mühendislik ve Web Güvenliği.",
+  },
+  {
+    type: "work",
+    title: "Full-Stack Yazılım Geliştirici (Stajyer)",
+    organization: "Mergentech",
+    period: "07/2022 – 08/2022",
+    location: "Eskişehir",
+    description:
+      "JotForm benzeri form uygulaması projesinde Angular ile UI bileşenleri geliştirme; Java & Spring Boot ile REST API ve JWT oturum yönetimi.",
   },
   {
     type: "education",
     title: "Bilişim Sistemleri Mühendisliği",
     organization: "Muğla Sıtkı Koçman Üniversitesi",
-    period: "2020 - 2022",
-    description: "Yazılım geliştirme ve bilişim altyapıları temelleri.",
+    period: "2020 – 2022",
     location: "Muğla",
+    description:
+      "Mühendislik temelleri ve yazılım mimarileri eğitimi. 2. sınıfta ZBÜ Bilgisayar Mühendisliği'ne başarıyla yatay geçiş yapıldı.",
   },
 ];
 

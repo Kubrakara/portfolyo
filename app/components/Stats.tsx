@@ -13,10 +13,10 @@ interface Stat {
 }
 
 const stats: readonly Stat[] = [
-  { icon: FaProjectDiagram, value: 9, label: "Tamamlanan Proje", suffix: "+" },
-  { icon: FaCode, value: 15, label: "Teknoloji", suffix: "+" },
-  { icon: FaClock, value: 1, label: "Yıl Deneyim", suffix: "+" },
-  { icon: FaStar, value: 100, label: "Bu Yıl Commit", suffix: "+" },
+  { icon: FaProjectDiagram, value: 12, label: "Tamamlanan Proje", suffix: "+" },
+  { icon: FaCode, value: 20, label: "Kullanılan Teknoloji", suffix: "+" },
+  { icon: FaClock, value: 2, label: "Yıl Deneyim", suffix: "+" },
+  { icon: FaStar, value: 500, label: "GitHub Katkısı", suffix: "+" },
 ];
 
 function Counter({
