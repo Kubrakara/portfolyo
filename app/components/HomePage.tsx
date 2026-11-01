@@ -59,13 +59,16 @@ export default function HomePage() {
 
             {/* h1 Başlık & Waving Hand */}
             <div>
-              <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] font-bold tracking-tight text-foreground leading-[1.1] flex flex-wrap items-center justify-center lg:justify-start">
-                <span>Merhaba, ben Kübra</span>
-                <WavingHand />
+              <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] font-bold tracking-tight text-foreground leading-[1.15] flex flex-col items-center lg:items-start">
+                <span>Merhaba,</span>
+                <span className="inline-flex items-center">
+                  <span>Ben Kübra</span>
+                  <WavingHand />
+                </span>
               </h1>
 
               {/* Daktilo Efektli Unvanlar (Server dostu Client Component) */}
-              <div className="mt-2">
+              <div className="mt-3">
                 <HeroTypewriter />
               </div>
             </div>
