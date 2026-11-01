@@ -23,7 +23,7 @@ export function Footer() {
       viewport={{ once: true }}
       className="border-t border-border bg-card text-foreground transition-colors duration-300"
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-12">
+      <div className="w-full px-6 sm:px-10 md:px-16 lg:px-20 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Marka Bölümü */}
           <div className="space-y-4">

@@ -74,9 +74,10 @@ export default function AboutMe() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-6 sm:px-10 md:px-16 lg:px-24 py-12 bg-background text-foreground transition-colors duration-300">
-      {/* Üst Kısım - Hakkımda */}
-      <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between w-full max-w-7xl gap-12">
+    <div className="w-full py-16 sm:py-20 bg-background text-foreground transition-colors duration-300">
+      <div className="w-full px-6 sm:px-10 md:px-16 lg:px-20 flex flex-col items-center">
+        {/* Üst Kısım - Hakkımda */}
+        <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-12">
         <div className="relative w-full lg:w-1/2 flex justify-center">
           <Image
             src="/1ben.png"
@@ -171,6 +172,7 @@ export default function AboutMe() {
           Projelerimi Görüntüle
           <FaArrowRight aria-hidden="true" />
         </Link>
+      </div>
       </div>
     </div>
   );

@@ -29,8 +29,8 @@ export default function MyProjects() {
         );
 
   return (
-    <section className="min-h-screen px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-12 bg-background text-foreground transition-colors duration-300">
-      <div className="max-w-7xl mx-auto">
+    <section className="min-h-screen py-16 bg-background text-foreground transition-colors duration-300">
+      <div className="w-full px-6 sm:px-10 md:px-16 lg:px-20">
         <motion.h2
           className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 tracking-tight"
           initial={prefersReducedMotion ? false : { opacity: 0, y: -20 }}

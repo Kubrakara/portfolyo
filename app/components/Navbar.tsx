@@ -1,15 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { OverlayMenu } from "./OverlayMenu";
-import { ThemeSwitch } from "./ThemeSwitch";
-import { NAV_ITEMS } from "@/lib/constants";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { motion } from "motion/react";
+import clsx from "clsx";
+import { NAV_ITEMS } from "@/lib/constants";
+import { ThemeSwitch } from "./ThemeSwitch";
+import { OverlayMenu } from "./OverlayMenu";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleMenu = () => {
     setIsOpen((prev) => {
@@ -23,55 +26,81 @@ export function Navbar() {
 
   return (
     <>
-      <motion.header
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="fixed w-full top-0 left-0 z-50 py-4 shadow-lg bg-gradient-to-r from-nav-from via-nav-via to-nav-to"
-      >
-        <div className="flex justify-between items-center w-[calc(100%-48px)] sm:w-[calc(100%-80px)] max-w-7xl mx-auto">
-          {/* Logo */}
+      <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-md border-b border-border transition-colors duration-200">
+        {/* Tam ekran genişliği ve eşit kenar dolguları (Hero ile birebir aynı sol/sağ çizgisi) */}
+        <div className="w-full px-6 sm:px-10 md:px-16 lg:px-20 h-16 sm:h-20 flex items-center justify-between">
+          {/* Logo (Tek kontrastlı renk, yüksek okunabilirlik) */}
           <Link
             href="/"
-            className="font-black text-2xl uppercase tracking-wider transition-opacity hover:opacity-90 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg px-1"
+            className="font-bold text-xl sm:text-2xl tracking-tight text-foreground hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg"
           >
-            <span className="text-nav-logo">Kübra</span>
-            <span className="text-nav-logo-sub">Kara</span>
+            Kübra Kara
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center space-x-2 text-lg font-semibold">
-            {NAV_ITEMS.map(({ label, href }) => (
-              <Link
-                key={href}
-                href={href}
-                className="nav-link px-4 py-2 rounded-lg font-medium text-nav-text hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              >
-                {label}
-              </Link>
-            ))}
+          {/* Desktop Navigasyon ve Aktif Link Göstergesi */}
+          <nav
+            className="hidden lg:flex items-center gap-1"
+            aria-label="Ana Menü"
+          >
+            {NAV_ITEMS.map(({ label, href }) => {
+              const isActive =
+                pathname === href ||
+                (href !== "/" && pathname.startsWith(href));
+
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  className={clsx(
+                    "relative px-4 py-2 rounded-lg text-sm sm:text-base transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
+                    isActive
+                      ? "text-accent font-semibold"
+                      : "text-muted hover:text-foreground font-medium"
+                  )}
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  {label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeNavIndicator"
+                      className="absolute bottom-0 left-2 right-2 h-0.5 bg-accent rounded-full"
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* Actions */}
+          {/* Aksiyonlar (Tema Değiştirici ve Mobil Menü Butonu) */}
           <div className="flex items-center gap-3">
-            <div className="hidden lg:flex">
+            <div className="flex items-center">
               <ThemeSwitch />
             </div>
 
-            {/* Mobile Menu Toggle Button */}
+            {/* Mobil Menü Butonu (WCAG AA - En az 44px) */}
             <button
               type="button"
-              className="lg:hidden p-2 text-nav-text hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-lg min-w-[44px] min-h-[44px] flex items-center justify-center"
+              className="lg:hidden w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl border border-border bg-card/80 text-foreground hover:text-accent hover:border-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               onClick={toggleMenu}
               aria-label={isOpen ? "Menüyü kapat" : "Menüyü aç"}
+              aria-expanded={isOpen}
             >
-              {isOpen ? <X size={26} aria-hidden="true" /> : <Menu size={26} aria-hidden="true" />}
+              {isOpen ? (
+                <X className="w-5 h-5" aria-hidden="true" />
+              ) : (
+                <Menu className="w-5 h-5" aria-hidden="true" />
+              )}
             </button>
           </div>
         </div>
-      </motion.header>
+      </header>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobil Menü Çekmecesi */}
       <OverlayMenu isOpen={isOpen} toggleMenu={toggleMenu} />
     </>
   );

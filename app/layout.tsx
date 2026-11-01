@@ -71,7 +71,7 @@ export default function RootLayout({
           <Navbar />
           <Snowfall />
           <BackToTop />
-          <main className="pt-24">{children}</main>
+          <main className="w-full min-h-[calc(100vh-5rem)]">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

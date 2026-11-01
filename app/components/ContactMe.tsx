@@ -32,7 +32,7 @@ export default function ContactMe() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-16 bg-background text-foreground transition-colors duration-300">
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 sm:px-10 md:px-16 lg:px-20 py-16 bg-background text-foreground transition-colors duration-300">
       <motion.div
         className="w-full max-w-2xl"
         initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
